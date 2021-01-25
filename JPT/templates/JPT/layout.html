@@ -4,10 +4,8 @@
 <head>
     <meta charset="utf-8" />
     <title>JopNet</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
-</head>
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous"></head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
 <body>
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="background-color:gold">
         <nav class="navbar navbar-defualt">
@@ -24,17 +22,22 @@
 
     {% block content %}
     {% endblock %}
-
-
+    
+    <!--исправить вид меню позже-->
     <div class="position-absolute bottom-0 start-50 translate-middle-x">
-     <div class="btn-group">
-      <button class="btn-default">news</button>
-      <button class="btn-default">friends</button>
-      <button class="btn-default">messages</button>
-      <button class="btn-default">main</button>
-     </div>
+        <div class="btn-group">
+
+            <button type="button" class="btn-default"><i class="bi bi-newspaper"></i>news</button>
+
+            <button type="button" class="btn-default"><i class="bi bi-people"></i>friends</button>
+
+            <button type="button" class="btn-default"><i class="bi bi-chat-fill"></i> messages</button>
+
+            <button type="button" class="btn-default"><i class="bi bi-app-indicator"></i>main</button>
+
+        </div>
     </div>
 
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
 </body>
 </html>
