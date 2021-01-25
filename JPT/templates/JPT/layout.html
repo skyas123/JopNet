@@ -1,6 +1,6 @@
 ﻿<!DOCTYPE html>
 
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en">
 <head>
     <meta charset="utf-8" />
     <title>JopNet</title>
@@ -8,10 +8,19 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
 </head>
 <body>
-    Hello
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="background-color:gold">
+        <nav class="navbar navbar-defualt">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    JopNet
+                </div>
 
-    {% block content %}
+            </div>
 
-    {% endblock %}
+
+        </nav>
+    </div>
+        {% block content %}
+        {% endblock %}
 </body>
 </html>
