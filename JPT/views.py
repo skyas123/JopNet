@@ -3,4 +3,8 @@ from django.http import HttpResponse
 
 # Create your views here.
 def index(request):
-  return render(request, 'JPT/index.html')
+  return render(request, 'JPT/home.html')
+
+def news(request):
+  return render(request, 'JPT/news.html')
+
