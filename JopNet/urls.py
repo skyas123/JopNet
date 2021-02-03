@@ -12,7 +12,8 @@ import JPT.views
 
 
 urlpatterns = [
-    url(r'^$',JPT.views.index, name='home'),
+    url(r'admin/',admin.site.urls),
     url(r'news',JPT.views.news, name='news'),
+    url(r'^$',JPT.views.index, name='home'),
 
 ]

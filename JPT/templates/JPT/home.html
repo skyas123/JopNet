@@ -2,7 +2,7 @@
 
 {% block content %}
 <div class="row shadow-sm rounded-3" style="background-color:white">
-<h1>NickName</h1>
+<h1>{{persons.first_name}} {{persons.second_name}}</h1>
 </div>
  
 <div class="row m-2" style="height:20rem">
@@ -31,10 +31,12 @@
  
  <div class="col-12">
     <p class="text-start fs-4">date-of-appearence</p>
+     <p class="text-start fs-4">{{persons.date_of_appearence}}</p>
     </div>
  
 <div class="col-12">
     <p class="text-start fs-4">Size</p>
+    <p class="text-start fs-4">{{persons.size}}</p>
     </div>
 
 </div>
