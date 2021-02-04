@@ -7,7 +7,7 @@ class Persons(models.Model):
     second_name=models.CharField(max_length=30)
     date_of_appearence=models.DateField(auto_now=False, auto_now_add=False)
     size=models.IntegerField(null=True,blank=True)
-    
+    photo=models.ImageField(upload_to=None, height_field=None, width_field=None, max_length=100)
 
     def _str_(self):
         return self.first_name
