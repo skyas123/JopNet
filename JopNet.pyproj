@@ -64,10 +64,9 @@
     <Folder Include="JopNet\" />
     <Folder Include="JPT\" />
     <Folder Include="JPT\migrations\" />
+    <Folder Include="JPT\media\" />
     <Folder Include="JPT\Static\" />
     <Folder Include="JPT\Static\Front\" />
-    <Folder Include="JPT\Static\pictures\" />
-    <Folder Include="JPT\Static\pictures\ava\" />
     <Folder Include="JPT\Static\Scripts\" />
     <Folder Include="JPT\Static\Style\" />
     <Folder Include="JPT\templates\" />

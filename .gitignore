@@ -339,3 +339,11 @@ ASALocalRun/
 # BeatPulse healthcheck temp database
 healthchecksdb
 /env
+/JPT/migrations/0004_auto_20210204_1429.py
+/JPT/migrations/0005_auto_20210204_1702.py
+/JPT/migrations/0006_auto_20210204_1729.py
+/JPT/migrations/0009_auto_20210204_1739.py
+/JPT/migrations/0008_auto_20210204_1734.py
+/JPT/migrations/0007_auto_20210204_1731.py
+/static/pictures/ava
+/ava

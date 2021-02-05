@@ -9,6 +9,9 @@ from django.contrib.auth.views import LoginView, LogoutView
 from django.conf.urls import include, url
 import JPT.views
 
+from django.conf.urls.static import static
+from django.conf import settings
+
 
 
 urlpatterns = [
@@ -16,4 +19,4 @@ urlpatterns = [
     url(r'news',JPT.views.news, name='news'),
     url(r'^$',JPT.views.index, name='home'),
 
-]
+]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)  #<- only for developing(probably)
