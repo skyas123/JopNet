@@ -14,7 +14,14 @@
     <img src="{{MEDIA_URL}}/{{persons.photo}}" class="card-img-top h-100 rounded-3 shadow-sm"  alt="">
 
   <div class="card-body">
-    <a href="#" class="btn btn-primary">Add photo</a>
+
+      <form action="" method="POST" enctype="multipart/form-data">
+       {% csrf_token %}
+        <label class="btn btn-primary" for="ava">add photo</label>
+       {{form}}
+        
+      </form>
+
   </div>
 
 </div>
@@ -30,7 +37,7 @@
  
  <div class="col-12">
     <p class="text-start fs-4">date-of-appearence</p>
-     <p class="text-start fs-4">{{persons.date_of_appearence}}</p>
+     <p class="text-start fs-4">{{persons.date_of_appearence}}</p> 
     </div>
  
 <div class="col-12">

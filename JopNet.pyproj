@@ -40,6 +40,9 @@
     <Compile Include="app\migrations\__init__.py" />
     <Compile Include="JPT\admin.py" />
     <Compile Include="JPT\apps.py" />
+    <Compile Include="JPT\forms.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="JPT\migrations\__init__.py" />
     <Compile Include="JPT\models.py" />
     <Compile Include="JPT\tests.py" />

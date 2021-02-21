@@ -9,6 +9,11 @@ class Persons(models.Model):
     size=models.IntegerField(null=True,blank=True)
     photo=models.ImageField(upload_to='ava/', height_field=None, width_field=None, max_length=100,null=True,blank=True)
 
+
+   
+
+    # за что отвечает функция ниже?
+
     def _str_(self):
         return self.first_name
     def _str_(self):
