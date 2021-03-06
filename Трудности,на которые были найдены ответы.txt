@@ -1,0 +1,21 @@
+1.Чтобы получить доступ к моделям вида many to many(m2m) и foreign key(fk) надо использовать переход через точку( пример {{persons.ava.photo}}},
+где persons ava приандлежит модели persons, а photo модели Media
+
+2.Применять bootstrap для форм надо в файле form.py в разделе widgets
+
+3.Чтобы после сохранения ModelForm получить только что сохраненный объект надо применять автоинкрементый автоматический ключ
+( не ставить поле с артибутом primary key=True)
+
+4.Миграции и создание БД можно осущесвить через командную строку, которую можно открыть в visual studio(vs)
+
+5.Чтобы связать значения в fk надо первым писать класс, в котором нет определения fk пример:
+
+persons:
+ava=models.foreignkey(to="media"...)
+
+media:
+photo=imagefile...
+
+чтобы связать фотографию и человека надо media.objects.get(pk=...).persons_set.add(someperson)
+
+6. Чтобы убрать autolabel в modelform надо прописать  labels={'photo':'' } в forms.py

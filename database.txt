@@ -7,10 +7,10 @@ class Persons(models.Model):
      second_name=models.CharField(max_length=30,default='')
      date_of_appearence=models.DateField(auto_now=False, auto_now_add=False)
      size=models.IntegerField(null=True,blank=True,default=0)
-     ava=models.ForeignKey("Media",on_delete=models.CASCADE,blank=True,null=True)
+     ava=models.ManyToManyField("Media")
      login=models.CharField(max_length=30,default='')
      password=models.CharField(max_length=30,default='')
-     friends = models.ManyToManyField("self",blank=True,null=True)
+     #friends = models.ManyToManyField("self")
 
     # за что отвечает функция ниже?
 
@@ -22,8 +22,6 @@ class Persons(models.Model):
         return self.date_of_appearence
      def _str_(self):
         return self.size
-     def _str_(self):
-        return self.ava
     
 
 
@@ -34,5 +32,5 @@ class Posts(models.Model):
     text=models.TextField()
     date=models.DateTimeField(auto_now_add=True)
     subphoto=models.ManyToManyField("Media")
-    author=models.ForeignKey(Persons,on_delete=models.CASCADE)
+
      
