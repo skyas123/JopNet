@@ -16,10 +16,11 @@
   <div class="card-body">
 
       <form action="" method="POST" enctype="multipart/form-data">
+        
        {% csrf_token %}
-        <label class="btn btn-primary" for="ava">add photo</label>
-       {{form}}
-
+       <label class="btn btn-primary" for="ava">+add photo</label>
+       {{formava}}
+       <button style="display:none" name="st" id="st">st</button>
       </form>
 
   </div>
@@ -51,10 +52,12 @@
 </div>
 
 <div class="row m-2">
-  <div class="col-9 offset-3 shadow-sm rounded-3" style="background-color:white;height:15rem">
-      <p>Posts</p>
-
-  </div>
+ <form action="" method="POST" enctype="multipart/form-data">
+       {% csrf_token %}
+       {{formpost}}
+     <button class="btn btn-primary" name="submit">submit</button>
+      </form>
+ 
 
 </div>
 

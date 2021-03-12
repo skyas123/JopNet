@@ -34,5 +34,5 @@ class Posts(models.Model):
     text=models.TextField()
     date=models.DateTimeField(auto_now_add=True)
     subphoto=models.ManyToManyField("Media")
-    author=models.ForeignKey(Persons,on_delete=models.CASCADE)
+    author=models.ForeignKey(Persons,on_delete=models.CASCADE,null=True)
      
