@@ -7,14 +7,14 @@ from .models import Media
 from .forms import PersonsForms
 from .forms import PostsForm
 from .forms import ava
+from .forms import photo
 
 
 # Create your views here.
 def index(request):
-  persons=Persons.objects.get(pk=7)
+  persons=Persons.objects.get(pk=8)
   
   if 'st' in request.POST:
-      print(request.POST)
       formava=ava(request.POST,request.FILES)
       if formava.is_valid() :
           avatar=formava.save()
@@ -24,17 +24,28 @@ def index(request):
   
 
   if 'submit' in request.POST:
-   print(request.POST)
-   formpost=PostsForm(request.POST,request.FILES)
+
+   formpost=PostsForm(request.POST)
+   formpicture=photo(request.POST,request.FILES)
+   images=request.FILES.getlist('photo')
    if formpost.is_valid():
+
           post=formpost.save()
           persons.posts_set.add(post)
+
+   if formpicture.is_valid():
+
+     for p in images:
+      picture=Media.objects.create(photo=p)
+      #it doesn't clear shoud i use picture.save() or not
+      post.subphoto.add(picture)
+
   else:
      formpost = PostsForm
-     
+     formpicture=photo
 
 
-  return render(request,'JPT/home.html',{'persons':persons,'formpost':formpost,'formava':formava})
+  return render(request,'JPT/home.html',{'persons':persons,'formpost':formpost,'formava':formava,'formpicture':formpicture})
 
 def news(request):
   return render(request, 'JPT/news.html')

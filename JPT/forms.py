@@ -20,4 +20,20 @@ class PostsForm(forms.ModelForm):
         model=Posts
         fields=['text']
         labels={'text':'' }
-        widgets={'text':forms.Textarea(attrs={'style':'background-color:white','class':'col-9 offset-3 shadow-sm rounded-3','height':'5rem'})}
+        widgets={
+
+                 'text':forms.Textarea(attrs={
+                     'style':'background-color:white',
+                     'class':'position-absolute top-50 start-50 translate-middle col-12 rounded-3',
+                     'rows':'1',
+                     'id':'text',
+                     'oninput':'auto_resize(this)'}),
+                 }
+       
+
+class photo (forms.ModelForm):
+    class Meta:
+        model=Media
+        fields=['photo']
+        labels={'photo':'' }
+        widgets= {'photo':forms.ClearableFileInput(attrs={'style':'display:none','id':'photo','multiple': True})}

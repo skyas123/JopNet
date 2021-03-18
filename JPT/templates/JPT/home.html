@@ -1,5 +1,6 @@
-{% extends "JPT/layout.html" %}
 
+{% extends "JPT/layout.html" %}
+{%load static%}
 {% block content %}
 <div class="row shadow-sm rounded-3" style="background-color:white">
 <h1>{{persons.first_name}} {{persons.second_name}}</h1>
@@ -51,14 +52,38 @@
 
 </div>
 
-<div class="row m-2">
- <form action="" method="POST" enctype="multipart/form-data">
-       {% csrf_token %}
-       {{formpost}}
-     <button class="btn btn-primary" name="submit">submit</button>
-      </form>
- 
+<div class="row m-2" style=" height:5rem">
+
+ <form action="" method="POST" class="col-9 offset-3 shadow-sm rounded-3 position-relative"  style="background-color:white" enctype="multipart/form-data">
+    
+      {% csrf_token %}
+     <div class="container">
+     <div class="row" style=" height:5rem">
+
+     <div class="col-1 position-relative h-100">
+       <img src={{MEDIA_URL}}{{persons.ava.photo}} class=" position-absolute top-50 start-50 translate-middle rounded-circle" style="width: 40px; height: 40px;" alt="">
+     </div>
+
+    <div class="col-9 position-relative h-100">{{formpost}}</div>
+
+    <div class="col-2 position-relative h-100">
+
+      <div class="col-12 position-relative">
+      <label  for="photo"><i class="bi bi-camera2 position-absolute top-50 start-50 translate-middle"></i></label>
+      </div>
+
+      <div class="col-12 m-3">
+      <button class="btn btn-primary btn-sm" name="submit">submit</button>
+      </div>
+
+    </div>
+     </div>
+     </div>
+     <script src= {% static 'AutoIncrementTextArea.js' %} ></script>
+
+       {{formpicture}}
+          
+  </form>
 
 </div>
-
 {% endblock %}

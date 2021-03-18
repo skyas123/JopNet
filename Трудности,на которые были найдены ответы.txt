@@ -19,3 +19,5 @@ photo=imagefile...
 чтобы связать фотографию и человека надо media.objects.get(pk=...).persons_set.add(someperson)
 
 6. Чтобы убрать autolabel в modelform надо прописать  labels={'photo':'' } в forms.py
+
+7.Чтобы добавить js скрипт надо докинуть его в html, а затем вызвать обработчик в widget
