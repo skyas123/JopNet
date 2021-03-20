@@ -24,7 +24,7 @@ class PostsForm(forms.ModelForm):
 
                  'text':forms.Textarea(attrs={
                      'style':'background-color:white',
-                     'class':'position-absolute top-50 start-50 translate-middle col-12 rounded-3',
+                     'class':'position-absolute my-4 col-12 rounded-3',
                      'rows':'1',
                      'id':'text',
                      'oninput':'auto_resize(this)'}),
