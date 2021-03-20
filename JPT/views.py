@@ -13,7 +13,8 @@ from .forms import photo
 # Create your views here.
 def index(request):
   persons=Persons.objects.get(pk=8)
-  
+  news=Posts.objects.filter(author=persons.pk)
+
   if 'st' in request.POST:
       formava=ava(request.POST,request.FILES)
       if formava.is_valid() :
@@ -45,7 +46,7 @@ def index(request):
      formpicture=photo
 
 
-  return render(request,'JPT/home.html',{'persons':persons,'formpost':formpost,'formava':formava,'formpicture':formpicture})
+  return render(request,'JPT/home.html',{'persons':persons,'formpost':formpost,'formava':formava,'formpicture':formpicture,'news':news})
 
 def news(request):
   return render(request, 'JPT/news.html')

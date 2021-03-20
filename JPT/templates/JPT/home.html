@@ -88,4 +88,17 @@
 
 </div>
 
+{% for nw in news %}
+
+<div class="row m-2">
+ <div class="col-9 offset-3 shadow-sm rounded-3 position-relative" style="background-color:white">
+
+
+{{nw.text}}
+
+
+ </div>
+</div>
+{% endfor %}
+
 {% endblock %}
