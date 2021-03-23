@@ -91,14 +91,58 @@
 {% for nw in news %}
 
 <div class="row m-2">
+
  <div class="col-9 offset-3 shadow-sm rounded-3 position-relative" style="background-color:white">
 
+<div class="row">
 
-{{nw.text}}
+<div class="container-fluid">
 
+<div class="row">
 
- </div>
+<div class="col-1">
+ <img src={{MEDIA_URL}}{{persons.ava.photo}} class="rounded-circle mt-2" style="width: 40px; height: 40px;" alt="">
 </div>
+
+<div class="col-3">
+ {{nw.author.first_name}}{{nw.author.second_name}}
+ <p>{{nw.date.day}}.{{nw.date.month}}.{{nw.date.year}} at {{nw.date.hour}}:{{nw.date.minute}}</p>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-12 me-2">
+ {{nw.text}}
+</div>
+
+<div class="col-12 m-2 border-bottom border-1">
+
+ {% for pct in nw.subphoto.all %}
+
+ <img src={{MEDIA_URL}}{{pct.photo}}  class="rounded-3 shadow-sm m-1" style="width: 100px; height: 100px;" alt="">
+
+ {% endfor %}
+
+</div>
+
+<div class="row">
+<div class="container-fluid">
+<div class="row">
+<i class="bi bi-heart m-2"></i>
+
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
 {% endfor %}
 
 {% endblock %}

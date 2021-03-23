@@ -1,5 +1,6 @@
-1.Чтобы получить доступ к моделям вида many to many(m2m) и foreign key(fk) надо использовать переход через точку( пример {{persons.ava.photo}}},
-где persons ava приандлежит модели persons, а photo модели Media
+1.Чтобы получить доступ к моделям вида foreign key(fk) надо использовать переход через точку( пример {{persons.ava.photo}}},
+где persons ava приандлежит модели persons, а photo модели Media. Для many to many m2m надо делать тоже,но с добавлением атрибута all 
+и последующим перебором в счетчике pct=news.subphoto.all -> pct.photo
 
 2.Применять bootstrap для форм надо в файле form.py в разделе widgets
 
