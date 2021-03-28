@@ -40,11 +40,15 @@ def index(request):
       picture=Media.objects.create(photo=p)
       #it doesn't clear shoud i use picture.save() or not
       post.subphoto.add(picture)
-
   else:
      formpost = PostsForm
      formpicture=photo
-
+  
+  if 'likebtn' in request.POST:
+       a=request.POST.get('likebtn')
+       nw=Posts.objects.get(pk=a)
+       nw.like+=1
+       nw.save()
 
   return render(request,'JPT/home.html',{'persons':persons,'formpost':formpost,'formava':formava,'formpicture':formpicture,'news':news})
 

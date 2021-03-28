@@ -65,7 +65,7 @@
        <img src={{MEDIA_URL}}{{persons.ava.photo}} class=" position-absolute top-50 start-50 translate-middle rounded-circle" style="width: 40px; height: 40px;" alt="">
      </div>
 
-    <div class="col-9 position-relative h-100">{{formpost}}</div>
+    <div class="col-9 position-relative h-100">{{formpost.text}}</div>
 
     <div class="col-2 position-relative h-100">
 
@@ -132,7 +132,13 @@
 <div class="row">
 <div class="container-fluid">
 <div class="row">
-<i class="bi bi-heart m-2"></i>
+
+
+      <form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label  for={{nw.pk}}> <i class=" bi bi-heart m-2">{{nw.like}}</i></label>
+        <button type ="submit" style="display:none" id={{nw.pk}} name="likebtn" value={{nw.pk}}></button>
+      </form>
 
 </div>
 </div>
