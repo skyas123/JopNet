@@ -45,10 +45,14 @@ def index(request):
      formpicture=photo
   
   if 'likebtn' in request.POST:
+       print(request.POST)
        a=request.POST.get('likebtn')
        nw=Posts.objects.get(pk=a)
        nw.like+=1
        nw.save()
+       return HttpResponse(nw.like,
+            content_type='html')
+ 
 
   return render(request,'JPT/home.html',{'persons':persons,'formpost':formpost,'formava':formava,'formpicture':formpicture,'news':news})
 
