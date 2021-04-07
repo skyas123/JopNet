@@ -90,7 +90,7 @@
 
 
  
-{% for nw in news %}
+{% for nw in news reversed %}
 
 <div class="row m-2">
 
@@ -138,11 +138,12 @@
 
       <form method="POST" enctype="multipart/form-data" action="/">
         {% csrf_token %}
-        <label  for={{nw.pk}}> <i class=" bi bi-heart m-2" id='{{nw.pk}}like'>{{nw.like}}</i></label>
+
+         
+        <label for={{nw.pk}} id='{{nw.pk}}like' > <i class=" bi bi-heart-fill" style="color:red"></i>{{nw.like}}</label>
+           
+
         <button type ="submit" style="display:none" id={{nw.pk}} name="likebtn"></button>
-
-
-
       </form>
 
 </div>
@@ -155,6 +156,7 @@
 </div>
 
 {% endfor %}
+
 
 <script>
     var csrftoken = $("[name=csrfmiddlewaretoken]").val();
@@ -173,8 +175,9 @@
 	            method: 'post',
 	            dataType: 'html',
 	            data: {likebtn: id },
-	            success: function(data){
-		            $("#"+id+"like").html(data)
+                success: function (data) {
+                    var answr = '<i class=" bi bi-heart-fill" style="color:red"></i>' + data;
+		            $("#"+id+"like").html(answr)
                 }
         
           });
