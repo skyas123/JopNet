@@ -45,12 +45,18 @@ def index(request):
      formpicture=photo
   
   if 'likebtn' in request.POST:
-       print(request.POST)
        a=request.POST.get('likebtn')
        nw=Posts.objects.get(pk=a)
        nw.like+=1
        nw.save()
        return HttpResponse(nw.like,
+            content_type='html')
+
+  if 'deletenw' in request.POST:
+       a=request.POST.get('deletenw')
+       Posts.objects.get(pk=a).delete()
+       answr=100
+       return HttpResponse(answr,
             content_type='html')
  
 

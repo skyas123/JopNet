@@ -92,7 +92,7 @@
  
 {% for nw in news reversed %}
 
-<div class="row m-2">
+<div class="row m-2" id="{{nw.pk}}holeNwBlock">
 
  <div class="col-9 offset-3 shadow-sm rounded-3 position-relative" style="background-color:white">
 
@@ -111,6 +111,8 @@
  <p>{{nw.date.day}}.{{nw.date.month}}.{{nw.date.year}} at {{nw.date.hour}}:{{nw.date.minute}}</p>
 </div>
 
+<label class="col-1 offset-7" for='{{nw.pk}}dlt'><i class="bi bi-x-circle"></i></label>
+ <button type ="submit" style="display:none" id='{{nw.pk}}dlt' value={{nw.pk}}  name="deletenw"></button>
 </div>
 
 </div>
@@ -160,6 +162,34 @@
 
 <script>
     var csrftoken = $("[name=csrfmiddlewaretoken]").val();
+
+    $("button[name='deletenw']").click(function (event) {
+          event.preventDefault();
+        var id = $(this).attr('value');
+      
+            $.ajax({
+
+                headers:{
+                 "X-CSRFToken": csrftoken
+                },
+
+	            url: '/',
+	            method: 'post',
+	            dataType: 'html',
+	            data: {deletenw: id },
+                success: function (data) {
+                    if (data == '100') {
+                        $("#"+id+"holeNwBlock").hide()
+                    }
+                }
+        
+          });
+
+
+
+    });
+
+
 
     $("button[name='likebtn']").click(function (event) {
           event.preventDefault();
