@@ -1,0 +1,81 @@
+{% extends "JPT/layout.html" %}
+
+{% block content %}
+
+<div class="row">
+
+    <div class="col-8 offset-2 position-relative" style="background-color:white">
+
+   <div class="input-group">
+      {% csrf_token %}
+    <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2" id="find">
+     </div>
+
+        <div id="resultSearch">
+        {% for friend in friendsList %}
+        <div class="row"  style="background-color:white">
+
+            <div class="container-fluid">
+
+                <div class="row">
+
+                    <div class="col-1">
+                        <img src={{MEDIA_URL}}{{friend.ava.photo}} class="rounded-circle mt-2" style="width: 40px; height: 40px;" alt="">
+                    </div>
+
+                    <div class="col-3">
+                        {{friend.first_name}} {{friend.second_name}}
+                        <button type="button" class="btn btn-link">Link</button>
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+        {% endfor %}
+        </div>
+
+        <div class="row"  style="background-color:white">
+        </div>
+     
+
+    </div>
+
+</div>
+
+<script>
+    var csrftoken = $("[name=csrfmiddlewaretoken]").val();
+
+  
+    $("#find").change(function (event) {
+          event.preventDefault();
+        var search = $(this).val();
+
+            $.ajax({
+
+                headers:{
+                 "X-CSRFToken": csrftoken
+                },
+
+	            url: '/friends',
+	            method: 'post',
+	            dataType: 'html',
+	            data: {find: search },
+                success: function (data) {
+                  $("#resultSearch").replaceWith(data)
+                   
+                }
+        
+          });
+
+
+
+    });
+
+ </script>
+
+
+
+{% endblock %}

@@ -1,15 +1,110 @@
 {% extends "JPT/layout.html" %}
 
 {% block content %}
-<!-- надо создать шаблон на основе формы ниже,чтобы новости создавались автоматически с нужным шаблоном-->
+
 <div class="col-12 shadow-sm rounded-3" style="background-color:white">
     <h1>NewsRoll</h1>
 </div>
 
-<div class="col-12 shadow-sm rounded-3">
-<div class="card border-0">
-    <div class="card-body">Nothing</div>
+
+
+{% for nw in newsRoll reversed %}
+
+<div class="row m-2">
+
+ <div class="col-12 shadow-sm rounded-3 position-relative" style="background-color:white">
+
+<div class="row">
+
+<div class="container-fluid">
+
+<div class="row">
+
+<div class="col-1">
+ <img src={{MEDIA_URL}}{{nw.author.ava.photo}} class="rounded-circle mt-2" style="width: 40px; height: 40px;" alt="">
+</div>
+
+<div class="col-3">
+ {{nw.author.first_name}} {{nw.author.second_name}}
+ <p>{{nw.date.day}}.{{nw.date.month}}.{{nw.date.year}} at {{nw.date.hour}}:{{nw.date.minute}}</p>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-12 me-2">
+ {{nw.text}}
+</div>
+
+<div class="col-12 m-2 border-bottom border-1">
+
+ {% for pct in nw.subphoto.all %}
+
+ <img src={{MEDIA_URL}}{{pct.photo}}  class="rounded-3 shadow-sm m-1" style="width: 100px; height: 100px;" alt="">
+
+ {% endfor %}
+
+</div>
+
+<div class="row">
+<div class="container-fluid">
+<div class="row">
+
+
+      <form method="POST" enctype="multipart/form-data" action="/">
+        {% csrf_token %}
+
+         
+        <label for={{nw.pk}} id='{{nw.pk}}like' > <i class=" bi bi-heart-fill" style="color:red"></i>{{nw.like}}</label>
+           
+
+        <button type ="submit" style="display:none" id={{nw.pk}} name="likebtn"></button>
+      </form>
+
 </div>
 </div>
+
+</div>
+
+</div>
+
+</div>
+
+{% endfor %}
+
+<script>
+    var csrftoken = $("[name=csrfmiddlewaretoken]").val();
+
+  
+    $("button[name='likebtn']").click(function (event) {
+          event.preventDefault();
+          var id=$(this).attr('id');
+      
+            $.ajax({
+
+                headers:{
+                 "X-CSRFToken": csrftoken
+                },
+
+	            url: '/news',
+	            method: 'post',
+	            dataType: 'html',
+	            data: {likebtn: id },
+                success: function (data) {
+                    var answr = '<i class=" bi bi-heart-fill" style="color:red"></i>' + data;
+		            $("#"+id+"like").html(answr)
+                }
+        
+          });
+
+
+
+    });
+
+ </script>
+
   
 {% endblock %}

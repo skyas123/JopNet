@@ -38,3 +38,6 @@ class photo (forms.ModelForm):
         labels={'photo':'' }
         widgets= {'photo':forms.ClearableFileInput(attrs={'style':'display:none','id':'photo','multiple': True}),}
 
+
+class searchform(forms.Form):
+     your_name = forms.CharField(label='', max_length=100)

@@ -17,6 +17,7 @@ urlpatterns = [
     url(r'admin/',admin.site.urls),
     url(r'news',JPT.views.news, name='news'),
     url(r'^$',JPT.views.index, name='home'),
-   
+    url(r'friends',JPT.views.friends, name='friends'),
+   # url(r'dialogs',JPT.views.dialogs, name='dialogs'),
 
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)  #<- only for developing(probably)

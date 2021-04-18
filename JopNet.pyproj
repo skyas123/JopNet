@@ -80,6 +80,8 @@
     <Content Include="JPT\templates\JPT\home.html" />
     <Content Include="JPT\templates\JPT\layout.html" />
     <Content Include="JPT\templates\JPT\news.html" />
+    <Content Include="JPT\templates\JPT\friends.html" />
+    <Content Include="JPT\templates\JPT\resultSearch.html" />
     <Content Include="requirements.txt" />
     <Content Include="db.sqlite3" />
     <Content Include="app\static\app\content\bootstrap.css" />
