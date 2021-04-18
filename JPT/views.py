@@ -91,16 +91,14 @@ def friends(request):
   if 'find' in request.POST:
        req=request.POST.get('find')
        req=req.split()
-       print(len(req))
+      
 
        if not len(req):
-        print('1 block')
         friendsList=Persons.objects.filter(friends=persons.pk)
         response=render(request, 'JPT/resultSearch.html',{"friendsList":friendsList})
         return HttpResponse(response,content_type="html")
 
        else:
-        print('2 block')
         friendsList=Persons.objects.filter(Q(first_name__in=req)|Q(second_name__in=req))
         response=render(request, 'JPT/resultSearch.html',{"friendsList":friendsList})
         return HttpResponse(response,content_type="html")
