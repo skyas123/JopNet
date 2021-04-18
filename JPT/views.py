@@ -8,7 +8,6 @@ from .forms import PersonsForms
 from .forms import PostsForm
 from .forms import ava
 from .forms import photo
-from .forms import  searchform
 from django.db.models import Q
 from django.http import JsonResponse
 from django.core import serializers
@@ -92,6 +91,7 @@ def friends(request):
        req=request.POST.get('find')
        req=req.split()
       
+       #не работают 100% совпадения по поиску доработать
 
        if not len(req):
         friendsList=Persons.objects.filter(friends=persons.pk)
@@ -108,3 +108,7 @@ def friends(request):
        
 
   return render(request, 'JPT/friends.html',{"friendsList":friendsList})
+
+def dialogs(request):
+
+    return render((request, 'JPT/dialigs.html',{"dialogsList":dialogsList}))

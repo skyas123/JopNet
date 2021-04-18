@@ -36,4 +36,17 @@ class Posts(models.Model):
     subphoto=models.ManyToManyField("Media")
     author=models.ForeignKey(Persons,on_delete=models.CASCADE,null=True)
     like=models.IntegerField(null=True,blank=True,default=0)
-     
+
+
+class Dialogs(models.Model):
+ listOfMembers=models.ManyToManyField("Persons")
+ dialogPfoto=models.ForeignKey(Media,on_delete=models.CASCADE,null=True)
+ date_of_appearence=models.DateTimeField(auto_now_add=True)
+
+
+class Message(models.Model):
+ date_of_appearence=models.DateTimeField(auto_now_add=True)
+ text=models.TextField()
+ atachment=models.ForeignKey(Dialogs,on_delete=models.CASCADE,null=True)
+ subphoto=models.ManyToManyField("Media")
+ author=models.ForeignKey(Persons,on_delete=models.CASCADE,null=True)
