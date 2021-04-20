@@ -19,6 +19,6 @@ urlpatterns = [
     url(r'^$',JPT.views.index, name='home'),
     url(r'friends',JPT.views.friends, name='friends'),
     url(r'^dialogs$',JPT.views.dialogs, name='dialogs'),
-    url(r'^dialogs/(\d+)$',JPT.views.dialog, name='dialog')
+    url(r'^dialogs/(\d+)/(\d+)$',JPT.views.dialog, name='dialog')
 
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)  #<- only for developing(probably)

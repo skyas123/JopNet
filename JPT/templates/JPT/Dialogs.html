@@ -7,13 +7,15 @@
     <div class="col-8 offset-2 position-relative" style="background-color:white">
 
         {% for dlg in dialogsList %}
+
          <style>
    a { 
     color: black;
     text-decoration: none; /* Отменяем подчеркивание у ссылки */
    } 
   </style>
-        <a href="/dialogs/{{dlg.pk}}" type="button" class="row"  style="background-color:white">
+
+        <a href="/dialogs/{{dlg.pk}}/{{persons.pk}}" type="button" class="row"  style="background-color:white">
 
             <div class="container-fluid">
 
@@ -34,6 +36,7 @@
                      {{dlg.dialogname}}
                      {%endif%}
                     </div>
+
 
                 </div>
 

@@ -117,6 +117,9 @@ def dialogs(request):
     return render(request,'JPT/dialogs.html',{"dialogsList":dialogsList,"persons":persons})
 
 def dialog(request, *args):
-    dlgpk=args
-    print(dlgpk)
+    dlgpk=args[0]
+    prsnl=args[1]
+    persons=Persons.objects.get(pk=prsnl)
+
+    
     return render(request,'JPT/dialog.html')
