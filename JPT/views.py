@@ -120,6 +120,6 @@ def dialog(request, *args):
     dlgpk=args[0]
     prsnl=args[1]
     persons=Persons.objects.get(pk=prsnl)
-
+    messageList=Message.objects.filter(atachment=dlgpk)
     
-    return render(request,'JPT/dialog.html')
+    return render(request,'JPT/dialog.html',{"messageList": messageList,"persons":persons})
