@@ -77,10 +77,13 @@
     <Folder Include="JPT\templates\JPT\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="JPT\templates\JPT\dialog.html" />
+    <Content Include="JPT\templates\JPT\Dialogs.html" />
     <Content Include="JPT\templates\JPT\home.html" />
     <Content Include="JPT\templates\JPT\layout.html" />
     <Content Include="JPT\templates\JPT\news.html" />
     <Content Include="JPT\templates\JPT\friends.html" />
+    <Content Include="JPT\templates\JPT\refreshdlg.html" />
     <Content Include="JPT\templates\JPT\resultSearch.html" />
     <Content Include="requirements.txt" />
     <Content Include="db.sqlite3" />

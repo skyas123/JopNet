@@ -1,0 +1,54 @@
+﻿{% extends "JPT/layout.html" %}
+
+{% block content %}
+
+<div class="row">
+
+    <div class="col-8 offset-2 position-relative" style="background-color:white">
+
+        {% for dlg in dialogsList %}
+         <style>
+   a { 
+    color: black;
+    text-decoration: none; /* Отменяем подчеркивание у ссылки */
+   } 
+  </style>
+        <a href="/dialogs/{{dlg.pk}}" type="button" class="row"  style="background-color:white">
+
+            <div class="container-fluid">
+
+                <div class="row">
+
+                    <div class="col-1">
+                        <img src={{MEDIA_URL}}{{dlg.dialogPfoto.photo}} class="rounded-circle mt-2" style="width: 40px; height: 40px;" alt="">
+                    </div>
+
+                    <div class="col-3">
+                     {%if dlg.listOfMembers.count == 2%}
+                     {%if dlg.listOfMembers.first.pk == persons.pk %}
+                     {{dlg.listOfMembers.last.first_name}} {{dlg.listOfMembers.last.second_name}}
+                     {%else%}
+                     {{dlg.listOfMembers.first.first_name}} {{dlg.listOfMembers.first.second_name}}
+                     {%endif%}
+                     {%else%}
+                     {{dlg.dialogname}}
+                     {%endif%}
+                    </div>
+
+                </div>
+
+            </div>
+
+        </a>
+        {% endfor %}
+        </div>
+
+        <div class="row"  style="background-color:white">
+        </div>
+     
+
+    </div>
+
+
+
+{% endblock %}

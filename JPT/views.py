@@ -4,6 +4,8 @@ from django.http import HttpResponse
 from .models import Persons
 from .models import Posts
 from .models import Media
+from .models import Dialogs
+from .models import Message
 from .forms import PersonsForms
 from .forms import PostsForm
 from .forms import ava
@@ -14,7 +16,7 @@ from django.core import serializers
 
 # Create your views here.
 def index(request):
-  persons=Persons.objects.get(pk=9)
+  persons=Persons.objects.get(pk=8)
   news=Posts.objects.filter(author=persons.pk)
 
   if 'st' in request.POST:
@@ -67,7 +69,7 @@ def index(request):
   return render(request,'JPT/home.html',{'persons':persons,'formpost':formpost,'formava':formava,'formpicture':formpicture,'news':news})
 
 def news(request):
-  persons=Persons.objects.get(pk=9)
+  persons=Persons.objects.get(pk=8)
   listOfFriends=Persons.objects.filter(friends=persons.pk)
   newsRoll=Posts.objects.filter(author__in=listOfFriends)
 
@@ -83,7 +85,7 @@ def news(request):
   return render(request, 'JPT/news.html',{"newsRoll":newsRoll})
 
 def friends(request):
-  persons=Persons.objects.get(pk=9)
+  persons=Persons.objects.get(pk=8)
   
 
 
@@ -110,5 +112,11 @@ def friends(request):
   return render(request, 'JPT/friends.html',{"friendsList":friendsList})
 
 def dialogs(request):
+    persons=Persons.objects.get(pk=8)
+    dialogsList=Dialogs.objects.filter(listOfMembers=persons.pk)
+    return render(request,'JPT/dialogs.html',{"dialogsList":dialogsList,"persons":persons})
 
-    return render((request, 'JPT/dialigs.html',{"dialogsList":dialogsList}))
+def dialog(request, *args):
+    dlgpk=args
+    print(dlgpk)
+    return render(request,'JPT/dialog.html')
