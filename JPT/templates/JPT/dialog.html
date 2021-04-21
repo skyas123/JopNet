@@ -18,7 +18,16 @@
 
                   <div class="col-10 text-wrap text-break">
                    {{msg.author.first_name}} {{msg.author.second_name}}
-                  <div class="text">{{msg.text}}</div>
+                  <div class="text">
+
+                      {{msg.text}}
+                      
+                    {%for pht in msg.subphoto.all%}
+                    <img src={{MEDIA_URL}}{{pht.photo}} class="rounded-3 shadow-sm m-1" style="width: 100px; height: 100px;" alt="">
+                    {%endfor%}
+                      
+                   </div>
+                  
                     </div>
                  
 
