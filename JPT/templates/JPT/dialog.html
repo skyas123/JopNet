@@ -8,25 +8,26 @@
 
         {% for msg in messageList %}
 
-            <div class="container-fluid">
+            <div class="container-fluid my-2">
 
                 <div class="row">
 
-                 <div class="col-1 position-relative h-100 my-auto">
-                  <img src={{MEDIA_URL}}{{msg.author.ava.photo}} class=" position-absolute top-50 start-50 translate-middle rounded-circle" style="width: 40px; height: 40px;" alt="">
+                 <div class="col-1 position-relative">
+                  <img src={{MEDIA_URL}}{{msg.author.ava.photo}} class="rounded-circle mt-2" style="width: 40px; height: 40px;" alt="">
                  </div>
 
-                  <div class="col-3">
+                  <div class="col-10 text-wrap text-break">
                    {{msg.author.first_name}} {{msg.author.second_name}}
-                   <p>{{msg.text}}</p>
+                  <div class="text">{{msg.text}}</div>
                     </div>
                  
 
                 </div>
 
+              
             </div>
 
-        </a>
+       
         {% endfor %}
         </div>
 
