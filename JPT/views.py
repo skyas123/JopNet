@@ -6,6 +6,7 @@ from .models import Posts
 from .models import Media
 from .models import Dialogs
 from .models import Message
+from .forms import messageForm
 from .forms import PersonsForms
 from .forms import PostsForm
 from .forms import ava
@@ -16,7 +17,7 @@ from django.core import serializers
 
 # Create your views here.
 def index(request):
-  persons=Persons.objects.get(pk=8)
+  persons=Persons.objects.get(pk=9)
   news=Posts.objects.filter(author=persons.pk)
 
   if 'st' in request.POST:
@@ -69,7 +70,7 @@ def index(request):
   return render(request,'JPT/home.html',{'persons':persons,'formpost':formpost,'formava':formava,'formpicture':formpicture,'news':news})
 
 def news(request):
-  persons=Persons.objects.get(pk=8)
+  persons=Persons.objects.get(pk=9)
   listOfFriends=Persons.objects.filter(friends=persons.pk)
   newsRoll=Posts.objects.filter(author__in=listOfFriends)
 
@@ -85,7 +86,7 @@ def news(request):
   return render(request, 'JPT/news.html',{"newsRoll":newsRoll})
 
 def friends(request):
-  persons=Persons.objects.get(pk=8)
+  persons=Persons.objects.get(pk=9)
   
 
 
@@ -112,7 +113,7 @@ def friends(request):
   return render(request, 'JPT/friends.html',{"friendsList":friendsList})
 
 def dialogs(request):
-    persons=Persons.objects.get(pk=8)
+    persons=Persons.objects.get(pk=9)
     dialogsList=Dialogs.objects.filter(listOfMembers=persons.pk)
     return render(request,'JPT/dialogs.html',{"dialogsList":dialogsList,"persons":persons})
 
@@ -121,5 +122,28 @@ def dialog(request, *args):
     prsnl=args[1]
     persons=Persons.objects.get(pk=prsnl)
     messageList=Message.objects.filter(atachment=dlgpk)
+
     
-    return render(request,'JPT/dialog.html',{"messageList": messageList,"persons":persons})
+
+    if "text" in request.POST:
+     message=messageForm(request.POST)
+     formpicture=photo(request.POST,request.FILES)
+     images=request.FILES.getlist('photo')
+
+     if message.is_valid():
+          msg=message.save(commit=False)
+          msg.atachment=Dialogs.objects.get(pk=dlgpk)
+          msg.author=persons
+          msg.save()
+
+     if formpicture.is_valid():
+       for p in images:
+        picture=Media.objects.create(photo=p)
+        #it doesn't clear shoud i use picture.save() or not
+        msg.subphoto.add(picture)
+
+    else:
+      message=messageForm
+      formpicture=photo
+
+    return render(request,'JPT/dialog.html',{"messageList": messageList,"persons":persons,"message":messageForm,"formpicture":formpicture})

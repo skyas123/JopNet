@@ -12,10 +12,15 @@
 
                 <div class="row">
 
-                    <div class="col-1">
-                       <p>{{msg.text}}</p>
-                    </div>
+                 <div class="col-1 position-relative h-100 my-auto">
+                  <img src={{MEDIA_URL}}{{msg.author.ava.photo}} class=" position-absolute top-50 start-50 translate-middle rounded-circle" style="width: 40px; height: 40px;" alt="">
+                 </div>
 
+                  <div class="col-3">
+                   {{msg.author.first_name}} {{msg.author.second_name}}
+                   <p>{{msg.text}}</p>
+                    </div>
+                 
 
                 </div>
 
@@ -33,7 +38,7 @@
 
 <div class="row m-2" style=" height:5rem"  oninput="auto_resize(this)">
 
- <form action="" method="POST" class="col-9 offset-3 shadow-sm rounded-3 position-relative"  style="background-color:white" enctype="multipart/form-data">
+ <form action="" method="POST" class="col-8 offset-2 shadow-sm rounded-3 position-relative"  style="background-color:white" enctype="multipart/form-data">
     
       {% csrf_token %}
      <div class="container">
@@ -43,7 +48,7 @@
        <img src={{MEDIA_URL}}{{persons.ava.photo}} class=" position-absolute top-50 start-50 translate-middle rounded-circle" style="width: 40px; height: 40px;" alt="">
      </div>
 
-    <div class="col-9 position-relative h-100">{{formpost.text}}</div>
+    <div class="col-9 position-relative h-100">{{message.text}}</div>
 
     <div class="col-2 position-relative h-100">
 
