@@ -4,7 +4,7 @@
 {% block content %}
 
 <div class="row shadow-sm rounded-3" style="background-color:white">
-<h1>{{persons.first_name}} {{persons.second_name}}</h1>
+<h1>{{persons.first_name}} {{persons.last_name}}</h1>
 </div>
  
 <div class="row m-2" style="height:20rem">
@@ -62,7 +62,7 @@
      <div class="row" style=" height:5rem">
 
      <div class="col-1 position-relative h-100">
-       <img src={{MEDIA_URL}}{{persons.ava.photo}} class=" position-absolute top-50 start-50 translate-middle rounded-circle" style="width: 40px; height: 40px;" alt="">
+       <img src={{MEDIA_URL}}{{persons.persons.ava.photo}} class=" position-absolute top-50 start-50 translate-middle rounded-circle" style="width: 40px; height: 40px;" alt="">
      </div>
 
     <div class="col-9 position-relative h-100">{{formpost.text}}</div>

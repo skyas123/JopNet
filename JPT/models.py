@@ -1,16 +1,25 @@
 from django.db import models
+from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 # Create your models here.
 
 class Persons(models.Model):
-     first_name=models.CharField(max_length=30,default='')
-     second_name=models.CharField(max_length=30,default='')
-     date_of_appearence=models.DateField(auto_now=False, auto_now_add=False)
+     user=models.OneToOneField(User, on_delete=models.CASCADE)
+     date_of_appearence=models.DateField(auto_now=False, auto_now_add=False,null=True)
      size=models.IntegerField(null=True,blank=True,default=0)
      ava=models.ForeignKey("Media",on_delete=models.CASCADE,blank=True,null=True)
-     login=models.CharField(max_length=30,default='')
-     password=models.CharField(max_length=30,default='')
      friends = models.ManyToManyField("self",blank=True,null=True)
+
+     @receiver(post_save, sender=User)
+     def create_user_profile(sender, instance, created, **kwargs):
+      if created:
+        Persons.objects.create(user=instance)
+
+     @receiver(post_save, sender=User)
+     def save_user_profile(sender, instance, **kwargs):
+      instance.persons.save()
 
     # за что отвечает функция ниже?
 

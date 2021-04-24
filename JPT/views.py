@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.http import HttpResponse
 from .models import Persons
+from .models import User
 from .models import Posts
 from .models import Media
 from .models import Dialogs
@@ -17,8 +18,9 @@ from django.core import serializers
 
 # Create your views here.
 def index(request):
-  persons=Persons.objects.get(pk=9)
-  news=Posts.objects.filter(author=persons.pk)
+  print(request.user)
+  user=User.objects.get(pk=3)
+  news=Posts.objects.filter(author=user.pk)
 
   if 'st' in request.POST:
       formava=ava(request.POST,request.FILES)
@@ -67,10 +69,10 @@ def index(request):
             content_type='html')
  
 
-  return render(request,'JPT/home.html',{'persons':persons,'formpost':formpost,'formava':formava,'formpicture':formpicture,'news':news})
+  return render(request,'JPT/home.html',{'persons':user,'formpost':formpost,'formava':formava,'formpicture':formpicture,'news':news})
 
-def news(request):
-  persons=Persons.objects.get(pk=9)
+def news(request,user_id):
+  persons=Persons.objects.get(pk=user_id)
   listOfFriends=Persons.objects.filter(friends=persons.pk)
   newsRoll=Posts.objects.filter(author__in=listOfFriends)
 
@@ -85,8 +87,8 @@ def news(request):
 
   return render(request, 'JPT/news.html',{"newsRoll":newsRoll})
 
-def friends(request):
-  persons=Persons.objects.get(pk=9)
+def friends(request,user_id):
+  persons=Persons.objects.get(pk=user_id)
   
 
 
@@ -117,15 +119,14 @@ def dialogs(request):
     dialogsList=Dialogs.objects.filter(listOfMembers=persons.pk)
     return render(request,'JPT/dialogs.html',{"dialogsList":dialogsList,"persons":persons})
 
-def dialog(request, *args):
+def dialog(request, *args,user_id):
     dlgpk=args[0]
-    prsnl=args[1]
-    persons=Persons.objects.get(pk=prsnl)
+    persons=Persons.objects.get(pk=user_id)
     messageList=Message.objects.filter(atachment=dlgpk)
 
-    
 
     if "text" in request.POST:
+     print(request.user)
      message=messageForm(request.POST)
      formpicture=photo(request.POST,request.FILES)
      images=request.FILES.getlist('photo')

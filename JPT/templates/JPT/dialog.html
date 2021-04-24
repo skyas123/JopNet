@@ -4,7 +4,8 @@
 
 <div class="row">
 
-    <div class="col-8 offset-2 position-relative" style="background-color:white">
+
+    <div class="col-8 offset-2 overflow-auto" id="chatlog" style="background-color:white;height:75%">
 
         {% for msg in messageList %}
 
@@ -40,9 +41,7 @@
         {% endfor %}
         </div>
 
-        <div class="row"  style="background-color:white">
-        </div>
-     
+       
 
     </div>
 
@@ -81,4 +80,10 @@
 
 </div>
 
+<script>
+   
+   
+</script>
+
 {% endblock %}
+
