@@ -8,7 +8,7 @@
 
         {% for dlg in dialogsList %}
 
-        <a href="/dialogs/{{dlg.pk}}/{{persons.pk}}" type="button" class="row"  style="background-color:white">
+        <a href="/dialogs/{{dlg.pk}}" type="button" class="row"  style="background-color:white">
 
             <div class="container-fluid">
 
@@ -16,20 +16,20 @@
                     {%if dlg.listOfMembers.count == 2%}
                     {%if dlg.listOfMembers.first.pk == persons.pk %}
                     <div class="col-1">
-                        <img src={{MEDIA_URL}}{{dlg.listOfMembers.last.ava.photo}} class="rounded-circle mt-2" style="width: 40px; height: 40px;" alt="">
+                        <img src={{MEDIA_URL}}{{dlg.listOfMembers.last.user.persons.ava.photo}} class="rounded-circle mt-2" style="width: 40px; height: 40px;" alt="">
                     </div>
 
                     <div class="col-3">
-                     {{dlg.listOfMembers.last.first_name}} {{dlg.listOfMembers.last.second_name}}
+                     {{dlg.listOfMembers.last.user.first_name}} {{dlg.listOfMembers.last.user.last_name}}
                     </div>
 
                       {%else%}
                     <div class="col-1">
-                        <img src={{MEDIA_URL}}{{dlg.listOfMembers.first.ava.photo}} class="rounded-circle mt-2" style="width: 40px; height: 40px;" alt="">
+                        <img src={{MEDIA_URL}}{{dlg.listOfMembers.first.user.persons.ava.photo}} class="rounded-circle mt-2" style="width: 40px; height: 40px;" alt="">
                     </div>
 
                      <div class="col-3">
-                     {{dlg.listOfMembers.first.first_name}} {{dlg.listOfMembers.first.second_name}}
+                     {{dlg.listOfMembers.first.user.first_name}} {{dlg.listOfMembers.user.first.second_name}}
                       </div>
                      {%endif%}
                     {%else%}

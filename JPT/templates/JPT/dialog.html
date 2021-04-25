@@ -14,11 +14,11 @@
                 <div class="row">
 
                  <div class="col-1 position-relative">
-                  <img src={{MEDIA_URL}}{{msg.author.ava.photo}} class="rounded-circle mt-2" style="width: 40px; height: 40px;" alt="">
+                  <img src={{MEDIA_URL}}{{msg.author.user.persons.ava.photo}} class="rounded-circle mt-2" style="width: 40px; height: 40px;" alt="">
                  </div>
 
                   <div class="col-10 text-wrap text-break">
-                   {{msg.author.first_name}} {{msg.author.second_name}}
+                   {{msg.author.user.first_name}} {{msg.author.user.last_name}}
                   <div class="text">
 
                       {{msg.text}}
@@ -54,7 +54,7 @@
      <div class="row" style=" height:5rem">
 
      <div class="col-1 position-relative h-100">
-       <img src={{MEDIA_URL}}{{persons.ava.photo}} class=" position-absolute top-50 start-50 translate-middle rounded-circle" style="width: 40px; height: 40px;" alt="">
+       <img src={{MEDIA_URL}}{{user.persons.ava.photo}} class=" position-absolute top-50 start-50 translate-middle rounded-circle" style="width: 40px; height: 40px;" alt="">
      </div>
 
     <div class="col-9 position-relative h-100">{{message.text}}</div>

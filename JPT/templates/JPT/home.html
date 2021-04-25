@@ -4,7 +4,7 @@
 {% block content %}
 
 <div class="row shadow-sm rounded-3" style="background-color:white">
-<h1>{{persons.first_name}} {{persons.last_name}}</h1>
+<h1>{{user.first_name}} {{user.last_name}}</h1>
 </div>
  
 <div class="row m-2" style="height:20rem">
@@ -13,7 +13,7 @@
 <div class="col-3">
 
 <div class="card border-0 h-100 rounded-3 p-2 shadow-sm" style="background-color:white">
-    <img src={{MEDIA_URL}}{{persons.ava.photo}} class="card-img-top h-100 rounded-3 shadow-sm"  alt="">
+    <img src={{MEDIA_URL}}{{user.persons.ava.photo}} class="card-img-top h-100 rounded-3 shadow-sm"  alt="">
 
   <div class="card-body">
 
@@ -40,12 +40,12 @@
  
  <div class="col-12">
     <p class="text-start fs-4">date-of-appearence</p>
-     <p class="text-start fs-4">{{persons.date_of_appearence}}</p> 
+     <p class="text-start fs-4">{{user.persons.date_of_appearence}}</p> 
     </div>
  
 <div class="col-12">
     <p class="text-start fs-4">Size</p>
-    <p class="text-start fs-4">{{persons.size}}</p>
+    <p class="text-start fs-4">{{user.persons.size}}</p>
     </div>
 
 </div>
@@ -62,7 +62,7 @@
      <div class="row" style=" height:5rem">
 
      <div class="col-1 position-relative h-100">
-       <img src={{MEDIA_URL}}{{persons.persons.ava.photo}} class=" position-absolute top-50 start-50 translate-middle rounded-circle" style="width: 40px; height: 40px;" alt="">
+       <img src={{MEDIA_URL}}{{user.persons.ava.photo}} class=" position-absolute top-50 start-50 translate-middle rounded-circle" style="width: 40px; height: 40px;" alt="">
      </div>
 
     <div class="col-9 position-relative h-100">{{formpost.text}}</div>
@@ -103,11 +103,11 @@
 <div class="row">
 
 <div class="col-1">
- <img src={{MEDIA_URL}}{{persons.ava.photo}} class="rounded-circle mt-2" style="width: 40px; height: 40px;" alt="">
+ <img src={{MEDIA_URL}}{{user.persons.ava.photo}} class="rounded-circle mt-2" style="width: 40px; height: 40px;" alt="">
 </div>
 
 <div class="col-3">
- {{nw.author.first_name}} {{nw.author.second_name}}
+ {{nw.author.user.first_name}} {{nw.author.user.second_name}}
  <p>{{nw.date.day}}.{{nw.date.month}}.{{nw.date.year}} at {{nw.date.hour}}:{{nw.date.minute}}</p>
 </div>
 
