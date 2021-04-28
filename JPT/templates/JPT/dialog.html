@@ -1,11 +1,50 @@
-﻿ {% extends "JPT/layout.html" %}
-{%load static%}
-{% block content %}
+﻿{%load static%}
+<!DOCTYPE html>
+<!--исправить шапку и кнопки меню - не статичны -->
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>JopNet</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    
+</head>
+
+<body>
+  <style>
+      body {
+    overflow-y: hidden;
+}
+  </style>
 
 
+    <!--основной блок-->
+    <main>
+            <div class="col-12 vh-100" style="background-color:aliceblue" >
+
+                   <div class="col-12" style="background-color:gold">
+        <nav class="navbar navbar-defualt">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <h3>JopNeT</h3>
+                </div>
+
+            </div>
 
 
-    <div class="overflow-auto position-absolute col-lg-6 offset-lg-1 col-12 h-75" id="chatlog" style="background-color:white">
+        </nav>
+    </div>
+                   <div class="col-lg-6 offset-lg-3" style="background-color:white">
+                    <div class="row">
+                    <a href="/dialogs" class="col-2 btn btn-outline-light btn-sm mx-2" type="button"><i class="bi bi-arrow-left">Back</i></a>
+
+                    </div>
+                   </div>
+
+                <div class="col-lg-8 offset-lg-2">
+      
+                    <div class="overflow-auto h-100 position-fixed col-lg-6 offset-lg-1 col-12" id="chatlog" style="background-color:white">
 
         {% for msg in messageList %}
 
@@ -39,15 +78,10 @@
 
        
         {% endfor %}
+      <div class="col-lg-6 offset-lg-1 col-12" style="height:11rem"></div>
         </div>
 
-       
-
-   
-
-
-
- <form action="" method="POST" class="col-lg-6 offset-lg-1 col-12  shadow-sm rounded-3 position-absolute"  style="background-color:white;bottom:2rem" enctype="multipart/form-data">
+                    <form action="" method="POST" class="col-lg-6 offset-lg-1 col-12  shadow-sm rounded-3 position-fixed border border-top-2"  style="background-color:white;bottom:0rem" enctype="multipart/form-data">
     
       {% csrf_token %}
      <div class="container">
@@ -70,8 +104,29 @@
        {{formpicture}}
           
   </form>
+                </div>
+            </div>
+        </main>
+    
+  
+      
+  
+            
+   
 
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+    
+</body>
+</html>
 
+<script>
+    $("body").css("overflow", "hidden");
+    window.onload=function () {
+     var objDiv = document.getElementById("chatlog");
+     objDiv.scrollTop = objDiv.scrollHeight;
+}
 
-{% endblock %}
+</script>
+
+   
 
