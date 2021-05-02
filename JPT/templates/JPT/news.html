@@ -43,7 +43,25 @@
 
  {% for pct in nw.subphoto.all %}
 
- <img src={{MEDIA_URL}}{{pct.photo}}  class="rounded-3 shadow-sm m-1" style="width: 100px; height: 100px;" alt="">
+ <img src={{MEDIA_URL}}{{pct.photo}}  class="rounded-3 shadow-sm m-1" style="width: 100px; height: 100px;" alt="" data-bs-toggle="modal" data-bs-target="#pct{{pct.pk}}">
+
+<div class="modal fade" id="pct{{pct.pk}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog  modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">JopNet</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <img src={{MEDIA_URL}}{{pct.photo}}  class="rounded-3 shadow-sm m-1" style="width: 100%; height: 100%;" alt="" />
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
 
  {% endfor %}
 
@@ -103,6 +121,7 @@
 
 
     });
+
 
  </script>
 
