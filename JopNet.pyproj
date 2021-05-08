@@ -79,6 +79,7 @@
   <ItemGroup>
     <Content Include="JPT\templates\JPT\dialog.html" />
     <Content Include="JPT\templates\JPT\Dialogs.html" />
+    <Content Include="JPT\templates\JPT\guest.html" />
     <Content Include="JPT\templates\JPT\home.html" />
     <Content Include="JPT\templates\JPT\layout.html" />
     <Content Include="JPT\templates\JPT\news.html" />

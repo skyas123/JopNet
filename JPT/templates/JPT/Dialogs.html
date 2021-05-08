@@ -4,7 +4,7 @@
 
 <div class="row">
 
-    <div class="col-8 offset-2 position-relative" style="background-color:white">
+    <div class="col-8 offset-2 position-relative" style="background-color:white;height:42px">
 
         {% for dlg in dialogsList %}
 
@@ -16,7 +16,7 @@
                     {%if dlg.listOfMembers.count == 2%}
                     {%if dlg.listOfMembers.first.pk == persons.pk %}
                     <div class="col-1 my-auto">
-                        <img src={{MEDIA_URL}}{{dlg.listOfMembers.last.user.persons.ava.photo}} class="rounded-circle mt-2" style="width: 40px; height: 40px;" alt="">
+                        <img src={{MEDIA_URL}}{{dlg.listOfMembers.last.user.persons.ava.photo}} class="rounded-circle my-auto" style="width: 40px; height: 40px;" alt="">
                     </div>
 
                     <div class="col-3">
@@ -25,7 +25,7 @@
 
                       {%else%}
                     <div class="col-1">
-                        <img src={{MEDIA_URL}}{{dlg.listOfMembers.first.user.persons.ava.photo}} class="rounded-circle mt-2" style="width: 40px; height: 40px;" alt="">
+                        <img src={{MEDIA_URL}}{{dlg.listOfMembers.first.user.persons.ava.photo}} class="rounded-circle my-auto" style="width: 40px; height: 40px;" alt="">
                     </div>
 
                      <div class="col-3">
@@ -35,7 +35,7 @@
                     {%else%}
 
                     <div class="col-1">
-                        <img src={{MEDIA_URL}}{{dlg.dialogPfoto.photo}} class="rounded-circle mt-2" style="width: 40px; height: 40px;" alt="">
+                        <img src={{MEDIA_URL}}{{dlg.dialogPfoto.photo}} class="rounded-circle my-auto" style="width: 40px; height: 40px;" alt="">
                     </div>
 
                      <div class="col-3">

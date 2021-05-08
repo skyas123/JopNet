@@ -151,3 +151,10 @@ def dialog(request, *args):
       formpicture=photo
 
   return render(request,'JPT/dialog.html',{"messageList": messageList,"user":user,"message":messageForm,"formpicture":formpicture})
+
+def guest(request, *args):
+    guestPK=args[0]
+    guestInfo=User.objects.get(pk=guestPK)
+    news=Posts.objects.filter(author=guestPK)
+
+    return render(request, 'JPT/guest.html',{"news":news,"guest":guestInfo})
