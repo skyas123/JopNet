@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.shortcuts import redirect
 from django.http import HttpResponseRedirect
 from django.http import HttpResponse
 from .models import Persons
@@ -7,6 +8,7 @@ from .models import Posts
 from .models import Media
 from .models import Dialogs
 from .models import Message
+from .models import Friends
 from .forms import messageForm
 from .forms import PersonsForms
 from .forms import PostsForm
@@ -16,12 +18,12 @@ from django.db.models import Q
 from django.http import JsonResponse
 from django.core import serializers
 
+
 # Create your views here.
 def index(request):
-  print(request.user)
   user=request.user
   news=Posts.objects.filter(author=user.pk)
-
+  print(user.pk)
 
   if 'st' in request.POST:
       formava=ava(request.POST,request.FILES)
@@ -74,8 +76,9 @@ def index(request):
 
 def news(request):
   user=request.user
-  listOfFriends=Persons.objects.filter(friends=user.pk)
-  newsRoll=Posts.objects.filter(author__in=listOfFriends)
+  person=Persons.objects.get(user=user)
+  listOfFriends=Persons.objects.filter(friends=person.pk)
+  newsRoll=Posts.objects.filter(author__in=listOfFriends).exclude(author=person)
 
   if 'likebtn' in request.POST:
        a=request.POST.get('likebtn')
@@ -101,19 +104,20 @@ def friends(request):
 
        if not len(req):
         friendsList=User.objects.filter(persons__friends=user.pk)
-        response=render(request, 'JPT/resultSearch.html',{"friendsList":friendsList})
+        response=render(request, 'JPT/resultSearch.html',{"friendsList":friendsList,"user":user})
         return HttpResponse(response,content_type="html")
 
        else:
         friendsList=User.objects.filter(Q(first_name__in=req)|Q(last_name__in=req))
-        response=render(request, 'JPT/resultSearch.html',{"friendsList":friendsList})
+        response=render(request, 'JPT/resultSearch.html',{"friendsList":friendsList,"user":user})
         return HttpResponse(response,content_type="html")
 
   else:
        friendsList=User.objects.filter(persons__friends=user.pk)
-       
 
-  return render(request, 'JPT/friends.html',{"friendsList":friendsList})
+      
+
+  return render(request, 'JPT/friends.html',{"friendsList":friendsList,"user":user})
 
 def dialogs(request):
     user=request.user
@@ -153,8 +157,31 @@ def dialog(request, *args):
   return render(request,'JPT/dialog.html',{"messageList": messageList,"user":user,"message":messageForm,"formpicture":formpicture})
 
 def guest(request, *args):
+    user=request.user
     guestPK=args[0]
     guestInfo=User.objects.get(pk=guestPK)
     news=Posts.objects.filter(author=guestPK)
+    
+    if 'writeAmessage' in request.POST:
+     try:
+        Dialog=Dialogs.objects.get(Q(listOfMembers=guestPK) and Q(listOfMembers=user.pk))
+        print(Dialog.pk)
+     except Dialogs.DoesNotExist:
+            Dialog=Dialogs.objects.create()
+            Dialog.listOfMembers.add(user.persons)
+            Dialog.listOfMembers.add(guestInfo.persons)
+     return redirect('dialog', Dialog.pk)
+
+    if 'addToFriend' in request.POST:
+            FriendRequest=Friends.objects.create(Status=1)
+            FriendRequest.pair.add(user.persons)
+            FriendRequest.pair.add(guestInfo.persons)
+
+
+      
+
+
+
+
 
     return render(request, 'JPT/guest.html',{"news":news,"guest":guestInfo})

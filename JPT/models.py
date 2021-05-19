@@ -10,7 +10,7 @@ class Persons(models.Model):
      date_of_appearence=models.DateField(auto_now=False, auto_now_add=False,null=True)
      size=models.IntegerField(null=True,blank=True,default=0)
      ava=models.ForeignKey("Media",on_delete=models.CASCADE,blank=True,null=True)
-     friends = models.ManyToManyField("self",blank=True,null=True)
+     
 
      @receiver(post_save, sender=User)
      def create_user_profile(sender, instance, created, **kwargs):
@@ -60,3 +60,7 @@ class Message(models.Model):
  subphoto=models.ManyToManyField("Media")
  author=models.ForeignKey(Persons,on_delete=models.CASCADE,null=True)
  
+
+class Friends(models.Model):
+    Status=models.IntegerField(null=True,blank=True,default=0)
+    pair=models.ManyToManyField("Persons")
