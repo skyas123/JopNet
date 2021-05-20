@@ -104,12 +104,14 @@ def friends(request):
 
        if not len(req):
         friendsList=User.objects.filter(persons__friendss__pair=user.pk)
-        response=render(request, 'JPT/resultSearch.html',{"friendsList":friendsList,"user":user})
+        potentialFriendList=User.objects.filter(Q(persons__friends__pair=user.pk) and Q(persons__friends__Status=1))
+        response=render(request, 'JPT/resultSearch.html',{"friendsList":friendsList,"user":user,"potentialFriendList":potentialFriendList})
         return HttpResponse(response,content_type="html")
 
        else:
         friendsList=User.objects.filter(Q(first_name__in=req)|Q(last_name__in=req))
-        response=render(request, 'JPT/resultSearch.html',{"friendsList":friendsList,"user":user})
+        potentialFriendList=User.objects.filter(Q(persons__friends__pair=user.pk) and Q(persons__friends__Status=1))
+        response=render(request, 'JPT/resultSearch.html',{"friendsList":friendsList,"user":user,"potentialFriendList":potentialFriendList})
         return HttpResponse(response,content_type="html")
 
   else:
@@ -171,6 +173,7 @@ def dialog(request, *args):
 def guest(request, *args):
     user=request.user
     guestPK=args[0]
+    Status=args[1]
     guestInfo=User.objects.get(pk=guestPK)
     news=Posts.objects.filter(author=guestPK)
     
@@ -196,4 +199,4 @@ def guest(request, *args):
 
 
 
-    return render(request, 'JPT/guest.html',{"news":news,"guest":guestInfo})
+    return render(request, 'JPT/guest.html',{"news":news,"guest":guestInfo,"Status":Status})

@@ -35,8 +35,9 @@
         
        {% csrf_token %}
        <button class="btn btn-primary" name="writeAmessage">Write a message</button>
-
+        {% if Status != 2 %}
        <button class="btn btn-primary" name="addToFriend">Add to friends</button>
+        {%endif%}
       </form>
 
   </div>
