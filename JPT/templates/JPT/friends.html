@@ -39,6 +39,55 @@
         {% endfor %}
         </div>
 
+        {% for friend in potentialFriendList %}
+
+        {% if friend.pk != user.pk %}
+        <div class="row"  style="background-color:white">
+
+            <div class="container-fluid">
+
+                <div class="row">
+
+                    <div class="col-1">
+                        <img src={{MEDIA_URL}}{{friend.persons.ava.photo}} class="rounded-circle mt-2" style="width: 40px; height: 40px;" alt="">
+                    </div>
+
+                    <div class="col-5">
+                        {{friend.first_name}} {{friend.last_name}}
+                        <div class="row">
+                             <form action="" method="POST" enctype="multipart/form-data">
+        
+                             {% csrf_token %}
+
+                            <div class="col-4">
+                          <a href="/guest/{{friend.pk}}" type="button" class="btn btn-link">Link</a>
+                                </div>
+
+                             <div class="col-2">
+                        <button class="btn btn-primary" name="Add" value={{friend.pk}}>Add</button>
+                                 </div>
+
+                             <div class="col-2">
+                        <button class="btn btn-primary" name="Skip" value={{friend.pk}}>Skip</button>
+                            </div>
+
+                            </form>
+                            </div>
+                     
+                    </div>
+
+
+
+                </div>
+
+            </div>
+
+        </div>
+        {% endif %}
+
+        {% endfor %}
+
+
         <div class="row"  style="background-color:white">
         </div>
      

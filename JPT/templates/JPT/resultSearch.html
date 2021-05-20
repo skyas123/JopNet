@@ -12,7 +12,32 @@
 
                     <div class="col-3">
                          {{friend.first_name}} {{friend.last_name}}
-                        <button type="button" class="btn btn-link">Link</button>
+                        <a href="/guest/{{friend.pk}}" type="button" class="btn btn-link">Link</a>
+                    </div>
+
+
+                    <div class="col-5">
+                        {{friend.first_name}} {{friend.last_name}}
+                        <div class="row">
+                             <form action="" method="POST" enctype="multipart/form-data">
+        
+                             {% csrf_token %}
+
+                            <div class="col-4">
+                          <a href="/guest/{{friend.pk}}" type="button" class="btn btn-link">Link</a>
+                                </div>
+
+                             <div class="col-2">
+                        <button class="btn btn-primary" name="Add" value={{friend.pk}}>Add</button>
+                                 </div>
+
+                             <div class="col-2">
+                        <button class="btn btn-primary" name="Skip" value={{friend.pk}}>Skip</button>
+                            </div>
+
+                            </form>
+                            </div>
+                     
                     </div>
 
 

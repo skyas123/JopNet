@@ -77,7 +77,7 @@ def index(request):
 def news(request):
   user=request.user
   person=Persons.objects.get(user=user)
-  listOfFriends=Persons.objects.filter(friends=person.pk)
+  listOfFriends=Persons.objects.filter(friends__pair=person.pk)
   newsRoll=Posts.objects.filter(author__in=listOfFriends).exclude(author=person)
 
   if 'likebtn' in request.POST:
@@ -103,7 +103,7 @@ def friends(request):
        #не работают 100% совпадения по поиску доработать
 
        if not len(req):
-        friendsList=User.objects.filter(persons__friends=user.pk)
+        friendsList=User.objects.filter(persons__friendss__pair=user.pk)
         response=render(request, 'JPT/resultSearch.html',{"friendsList":friendsList,"user":user})
         return HttpResponse(response,content_type="html")
 
@@ -113,11 +113,23 @@ def friends(request):
         return HttpResponse(response,content_type="html")
 
   else:
-       friendsList=User.objects.filter(persons__friends=user.pk)
+       friendsList=User.objects.filter(Q(persons__friends__pair=user.pk) and Q(persons__friends__Status=2))
+       potentialFriendList=User.objects.filter(Q(persons__friends__pair=user.pk) and Q(persons__friends__Status=1))
 
+  if 'Add' in request.POST:
+      friendId=request.POST['Add']
+      friendsAdd=Friends.objects.get(Q(pair=user.pk) and Q(pair=friendId))
+      friendsAdd.Status=2
+      friendsAdd.save()
+
+  if 'Skip' in request.POST:
+      friendId=request.POST['Skip']
+      friendsSkip=Friends.objects.get(Q(pair=user.pk) and Q(pair=friendId))
+      friendsSkip.delete()
+      
       
 
-  return render(request, 'JPT/friends.html',{"friendsList":friendsList,"user":user})
+  return render(request, 'JPT/friends.html',{"friendsList":friendsList,"user":user,"potentialFriendList":potentialFriendList})
 
 def dialogs(request):
     user=request.user
