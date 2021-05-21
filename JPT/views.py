@@ -23,7 +23,6 @@ from django.core import serializers
 def index(request):
   user=request.user
   news=Posts.objects.filter(author=user.pk)
-  print(user.pk)
 
   if 'st' in request.POST:
       formava=ava(request.POST,request.FILES)
@@ -104,19 +103,19 @@ def friends(request):
 
        if not len(req):
         friendsList=User.objects.filter(persons__friends__pair=user.pk)
-        potentialFriendList=User.objects.filter(Q(persons__friends__pair=user.pk) and Q(persons__friends__Status=1))
+        potentialFriendList=User.objects.filter(Q(persons__friends__pair=user.pk) and Q(persons__friends__Status=1)).exclude(persons__friends__author=user.pk)
         response=render(request, 'JPT/resultSearch.html',{"friendsList":friendsList,"user":user,"potentialFriendList":potentialFriendList})
         return HttpResponse(response,content_type="html")
 
        else:
         friendsList=User.objects.filter(Q(first_name__in=req)|Q(last_name__in=req))
-        potentialFriendList=User.objects.filter(Q(persons__friends__pair=user.pk) and Q(persons__friends__Status=1))
+        potentialFriendList=User.objects.filter(Q(persons__friends__pair=user.pk) and Q(persons__friends__Status=1)).exclude(persons__friends__author=user.pk)
         response=render(request, 'JPT/resultSearch.html',{"friendsList":friendsList,"user":user,"potentialFriendList":potentialFriendList})
         return HttpResponse(response,content_type="html")
 
   else:
        friendsList=User.objects.filter(Q(persons__friends__pair=user.pk) and Q(persons__friends__Status=2))
-       potentialFriendList=User.objects.filter(Q(persons__friends__pair=user.pk) and Q(persons__friends__Status=1))
+       potentialFriendList=User.objects.filter(Q(persons__friends__pair=user.pk) and Q(persons__friends__Status=1)).exclude(persons__friends__author=user.pk)
 
   if 'Add' in request.POST:
       friendId=request.POST['Add']
@@ -193,7 +192,7 @@ def guest(request, *args):
             FriendRequest=Friends.objects.create(Status=1)
             FriendRequest.pair.add(user.persons)
             FriendRequest.pair.add(guestInfo.persons)
-
+            user.friends_set.add(FriendRequest)
 
       
 

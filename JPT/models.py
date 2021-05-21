@@ -64,3 +64,5 @@ class Message(models.Model):
 class Friends(models.Model):
     Status=models.IntegerField(null=True,blank=True,default=0)
     pair=models.ManyToManyField("Persons")
+    author=models.ForeignKey(User,on_delete=models.CASCADE,null=True)
+
