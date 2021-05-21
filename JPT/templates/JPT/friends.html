@@ -26,7 +26,7 @@
 
                     <div class="col-3">
                         {{friend.first_name}} {{friend.last_name}}
-                          <a href="/guest/{{friend.pk}}/2" type="button" class="btn btn-link">Link</a>
+                          <a href="/guest/{{friend.pk}}/{{Status}}" type="button" class="btn btn-link">Link</a>
                     </div>
 
 
@@ -60,7 +60,7 @@
                              {% csrf_token %}
 
                             <div class="col-4">
-                          <a href="/guest/{{friend.pk}}/1" type="button" class="btn btn-link">Link</a>
+                          <a href="/guest/{{friend.pk}}/{{Status}}" type="button" class="btn btn-link">Link</a>
                                 </div>
 
                              <div class="col-2">

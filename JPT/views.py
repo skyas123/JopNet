@@ -102,18 +102,21 @@ def friends(request):
        #не работают 100% совпадения по поиску доработать
 
        if not len(req):
+        Status=2
         friendsList=User.objects.filter(persons__friends__pair=user.pk)
         potentialFriendList=User.objects.filter(Q(persons__friends__pair=user.pk) and Q(persons__friends__Status=1)).exclude(persons__friends__author=user.pk)
-        response=render(request, 'JPT/resultSearch.html',{"friendsList":friendsList,"user":user,"potentialFriendList":potentialFriendList})
+        response=render(request, 'JPT/resultSearch.html',{"friendsList":friendsList,"user":user,"potentialFriendList":potentialFriendList,"Status":Status})
         return HttpResponse(response,content_type="html")
 
        else:
+        Status=1
         friendsList=User.objects.filter(Q(first_name__in=req)|Q(last_name__in=req))
-        potentialFriendList=User.objects.filter(Q(persons__friends__pair=user.pk) and Q(persons__friends__Status=1)).exclude(persons__friends__author=user.pk)
-        response=render(request, 'JPT/resultSearch.html',{"friendsList":friendsList,"user":user,"potentialFriendList":potentialFriendList})
+        potentialFriendList=None
+        response=render(request, 'JPT/resultSearch.html',{"friendsList":friendsList,"user":user,"potentialFriendList":potentialFriendList,"Status":Status})
         return HttpResponse(response,content_type="html")
 
   else:
+       Status=2
        friendsList=User.objects.filter(Q(persons__friends__pair=user.pk) and Q(persons__friends__Status=2))
        potentialFriendList=User.objects.filter(Q(persons__friends__pair=user.pk) and Q(persons__friends__Status=1)).exclude(persons__friends__author=user.pk)
 
@@ -130,7 +133,7 @@ def friends(request):
       
       
 
-  return render(request, 'JPT/friends.html',{"friendsList":friendsList,"user":user,"potentialFriendList":potentialFriendList})
+  return render(request, 'JPT/friends.html',{"friendsList":friendsList,"user":user,"potentialFriendList":potentialFriendList,"Status":Status})
 
 def dialogs(request):
     user=request.user
