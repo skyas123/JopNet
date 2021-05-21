@@ -103,7 +103,7 @@ def friends(request):
        #не работают 100% совпадения по поиску доработать
 
        if not len(req):
-        friendsList=User.objects.filter(persons__friendss__pair=user.pk)
+        friendsList=User.objects.filter(persons__friends__pair=user.pk)
         potentialFriendList=User.objects.filter(Q(persons__friends__pair=user.pk) and Q(persons__friends__Status=1))
         response=render(request, 'JPT/resultSearch.html',{"friendsList":friendsList,"user":user,"potentialFriendList":potentialFriendList})
         return HttpResponse(response,content_type="html")
@@ -143,7 +143,7 @@ def dialog(request, *args):
   user=request.user
   Dialogs.objects.get(pk=dlgpk)
 
-  if  Dialogs.objects.get(Q(pk=dlgpk) and Q(listOfMembers=user.pk)): 
+  if  Dialogs.objects.get(pk=dlgpk,listOfMembers=user.pk): 
      messageList=Message.objects.filter(atachment=dlgpk)
 
   if "text" in request.POST:
@@ -176,11 +176,13 @@ def guest(request, *args):
     Status=args[1]
     guestInfo=User.objects.get(pk=guestPK)
     news=Posts.objects.filter(author=guestPK)
-    
     if 'writeAmessage' in request.POST:
      try:
-        Dialog=Dialogs.objects.get(Q(listOfMembers=guestPK) and Q(listOfMembers=user.pk))
-        print(Dialog.pk)
+        dialogset=Dialogs.objects.filter(listOfMembers=guestInfo.persons.pk).filter(listOfMembers=user.persons.pk)
+        if dialogset.count()==1:
+            for dlg in dialogset:
+                Dialog=dlg
+
      except Dialogs.DoesNotExist:
             Dialog=Dialogs.objects.create()
             Dialog.listOfMembers.add(user.persons)
