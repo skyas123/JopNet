@@ -98,12 +98,13 @@ def friends(request):
   if 'find' in request.POST:
        req=request.POST.get('find')
        req=req.split()
-      
+       
+    
        #не работают 100% совпадения по поиску доработать
 
-       if not len(req):
+       if not len(req) or len(req)==0:
         Status=2
-        friendsList=User.objects.filter(persons__friends__pair=user.pk)
+        friendsList=User.objects.filter(Q(persons__friends__pair=user.pk) and Q(persons__friends__Status=2))
         potentialFriendList=User.objects.filter(Q(persons__friends__pair=user.pk) and Q(persons__friends__Status=1)).exclude(persons__friends__author=user.pk)
         response=render(request, 'JPT/resultSearch.html',{"friendsList":friendsList,"user":user,"potentialFriendList":potentialFriendList,"Status":Status})
         return HttpResponse(response,content_type="html")
@@ -176,20 +177,22 @@ def guest(request, *args):
     user=request.user
     guestPK=args[0]
     Status=args[1]
+    Status=int(Status)
     guestInfo=User.objects.get(pk=guestPK)
     news=Posts.objects.filter(author=guestPK)
+
     if 'writeAmessage' in request.POST:
-     try:
+     
         dialogset=Dialogs.objects.filter(listOfMembers=guestInfo.persons.pk).filter(listOfMembers=user.persons.pk)
         if dialogset.count()==1:
             for dlg in dialogset:
                 Dialog=dlg
-
-     except Dialogs.DoesNotExist:
-            Dialog=Dialogs.objects.create()
-            Dialog.listOfMembers.add(user.persons)
-            Dialog.listOfMembers.add(guestInfo.persons)
-     return redirect('dialog', Dialog.pk)
+                return redirect('dialog', Dialog.pk)
+        elif dialogset.count()==0:
+         Dialog=Dialogs.objects.create()
+         Dialog.listOfMembers.add(user.persons)
+         Dialog.listOfMembers.add(guestInfo.persons)
+         return redirect('dialog', Dialog.pk)
 
     if 'addToFriend' in request.POST:
             FriendRequest=Friends.objects.create(Status=1)
