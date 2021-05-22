@@ -11,9 +11,26 @@
                         <img src={{MEDIA_URL}}{{friend.persons.ava.photo}} class="rounded-circle mt-2" style="width: 40px; height: 40px;" alt="">
                     </div>
 
-                    <div class="col-3">
+                    <div class="col-5">
                         {{friend.first_name}} {{friend.last_name}}
-                          <a href="/guest/{{friend.pk}}/{{Status}}" type="button" class="btn btn-link">Link</a>
+                             <form action="" method="POST" enctype="multipart/form-data">
+        
+                             {% csrf_token %}
+
+                       <div class="container-fluid">
+                           <div class="row">
+                             
+                        <div class="col-4">
+                         <a href="/guest/{{friend.pk}}/{{Status}}" type="button" class="btn btn-link">Link</a>
+                        </div>
+
+                        <div class="col-4 ">
+                        <button class="btn btn-primary" name="Skip" value={{friend.pk}}>Skip</button>
+                        </div>
+
+                           </div>
+                        </div>
+                           </form>
                     </div>
 
 
@@ -41,25 +58,27 @@
 
                     <div class="col-5">
                         {{friend.first_name}} {{friend.last_name}}
-                        <div class="row">
-                             <form action="" method="POST" enctype="multipart/form-data">
+                           <form action="" method="POST" enctype="multipart/form-data">
         
                              {% csrf_token %}
+                         <div class="container-fluid">
+                           <div class="row">
 
                             <div class="col-4">
                           <a href="/guest/{{friend.pk}}/{{Status}}" type="button" class="btn btn-link">Link</a>
                                 </div>
 
-                             <div class="col-2">
+                             <div class="col-4">
                         <button class="btn btn-primary" name="Add" value={{friend.pk}}>Add</button>
                                  </div>
 
-                             <div class="col-2">
+                             <div class="col-4">
                         <button class="btn btn-primary" name="Skip" value={{friend.pk}}>Skip</button>
                             </div>
 
+                          </div>
+                        </div>
                             </form>
-                            </div>
                      
                     </div>
 
