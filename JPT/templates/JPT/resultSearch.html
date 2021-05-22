@@ -1,24 +1,44 @@
-﻿  {% for friend in friendsList  %}
-        {% if friend.pk != user.pk %}
-        <div class="row">
+﻿  
+        {% for friend in friendsList %}
+            {% if friend.pk != user.pk %}
+        <div class="row"  style="background-color:white">
 
             <div class="container-fluid">
 
                 <div class="row">
 
                     <div class="col-1">
-                        <img src={{MEDIA_URL}}{{friend.persons.ava.photo}}  class="rounded-circle mt-2" style="width: 40px; height: 40px;" alt="">
+                        <img src={{MEDIA_URL}}{{friend.persons.ava.photo}} class="rounded-circle mt-2" style="width: 40px; height: 40px;" alt="">
                     </div>
 
                     <div class="col-3">
-                         {{friend.first_name}} {{friend.last_name}}
-                        <a href="/guest/{{friend.pk}}/{{Status}}" type="button" class="btn btn-link">Link</a>
+                        {{friend.first_name}} {{friend.last_name}}
+                          <a href="/guest/{{friend.pk}}/{{Status}}" type="button" class="btn btn-link">Link</a>
                     </div>
-             {% endif %}
-        {% endfor %}
 
- {% for friend in potentialFriendList  %}
+
+                </div>
+
+            </div>
+            </div>
+        
+            {% endif %}
+        {% endfor %}
+       
+        
+        {% for friend in potentialFriendList %}
+
         {% if friend.pk != user.pk %}
+        <div class="row"  style="background-color:white">
+
+            <div class="container-fluid">
+
+                <div class="row">
+
+                    <div class="col-1">
+                        <img src={{MEDIA_URL}}{{friend.persons.ava.photo}} class="rounded-circle mt-2" style="width: 40px; height: 40px;" alt="">
+                    </div>
+
                     <div class="col-5">
                         {{friend.first_name}} {{friend.last_name}}
                         <div class="row">
@@ -44,10 +64,13 @@
                     </div>
 
 
+
                 </div>
 
             </div>
 
         </div>
         {% endif %}
+
         {% endfor %}
+        

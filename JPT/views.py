@@ -112,8 +112,7 @@ def friends(request):
        else:
         Status=1
         friendsList=User.objects.filter(Q(first_name__in=req)|Q(last_name__in=req))
-        potentialFriendList=None
-        response=render(request, 'JPT/resultSearch.html',{"friendsList":friendsList,"user":user,"potentialFriendList":potentialFriendList,"Status":Status})
+        response=render(request, 'JPT/resultSearch.html',{"friendsList":friendsList,"user":user,"Status":Status})
         return HttpResponse(response,content_type="html")
 
   else:
