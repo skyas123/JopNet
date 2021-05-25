@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.shortcuts import redirect
+from django.contrib.auth import authenticate, login
 from django.http import HttpResponseRedirect
 from django.http import HttpResponse
 from .models import Persons
@@ -14,6 +15,7 @@ from .forms import PersonsForms
 from .forms import PostsForm
 from .forms import ava
 from .forms import photo
+from .forms import UserForms
 from django.db.models import Q
 from django.http import JsonResponse
 from django.core import serializers
@@ -75,9 +77,8 @@ def index(request):
 
 def news(request):
   user=request.user
-  person=Persons.objects.get(user=user)
-  listOfFriends=Persons.objects.filter(friends__pair=person.pk)
-  newsRoll=Posts.objects.filter(author__in=listOfFriends).exclude(author=person)
+  listOfFriends=Persons.objects.filter(friends__pair=user.persons.pk)
+  newsRoll=Posts.objects.filter(author__in=listOfFriends).exclude(author=user.persons)
 
   if 'likebtn' in request.POST:
        a=request.POST.get('likebtn')
@@ -104,8 +105,8 @@ def friends(request):
 
        if not len(req) or len(req)==0:
         Status=2
-        friendsList=User.objects.filter(Q(persons__friends__pair=user.pk) and Q(persons__friends__Status=2))
-        potentialFriendList=User.objects.filter(Q(persons__friends__pair=user.pk) and Q(persons__friends__Status=1)).exclude(persons__friends__author=user.pk)
+        friendsList=User.objects.filter(persons__friends__pair=user.pk,persons__friends__Status=2)
+        potentialFriendList=User.objects.filter(persons__friends__pair=user.pk,persons__friends__Status=1).exclude(persons__friends__author=user.pk)
         response=render(request, 'JPT/resultSearch.html',{"friendsList":friendsList,"user":user,"potentialFriendList":potentialFriendList,"Status":Status})
         return HttpResponse(response,content_type="html")
 
@@ -117,14 +118,15 @@ def friends(request):
 
   else:
        Status=2
-       friendsList=User.objects.filter(Q(persons__friends__pair=user.pk) and Q(persons__friends__Status=2))
-       potentialFriendList=User.objects.filter(Q(persons__friends__pair=user.pk) and Q(persons__friends__Status=1)).exclude(persons__friends__author=user.pk)
+       friendsList=User.objects.filter(persons__friends__pair=user.pk,persons__friends__Status=2)
+       potentialFriendList=User.objects.filter(persons__friends__pair=user.pk,persons__friends__Status=1).exclude(persons__friends__author=user.pk)
 
   if 'Add' in request.POST:
       friendId=request.POST['Add']
-      friendsAdd=Friends.objects.get(Q(pair=user.pk) and Q(pair=friendId))
-      friendsAdd.Status=2
-      friendsAdd.save()
+      friendsAdd=Friends.objects.filter(pair=user.pk).filter(pair=friendId)
+      if friendsAdd.count()==1:
+       friendsAdd.Status=2
+       friendsAdd.first().save()
 
   if 'Skip' in request.POST:
       friendId=request.POST['Skip']
@@ -206,3 +208,20 @@ def guest(request, *args):
 
 
     return render(request, 'JPT/guest.html',{"news":news,"guest":guestInfo,"Status":Status})
+
+
+def auth(request):
+
+ form=UserForms
+ if request.POST:
+    username = request.POST['username']
+    password = request.POST['password']
+    user = authenticate(request, username=username, password=password)
+    if user is not None:
+        login(request, user)
+        return redirect('home')
+
+
+
+
+ return render(request, 'JPT/auth.html',{'form':form})

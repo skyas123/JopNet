@@ -1,4 +1,5 @@
 from django import forms
+from JPT.models import User
 from JPT.models import Persons
 from JPT.models import Media
 from JPT.models import Posts
@@ -53,3 +54,9 @@ class messageForm(forms.ModelForm):
                      'id':'text',
                      'oninput':'auto_resize(this)'}),
                  }
+
+class UserForms (forms.ModelForm):
+    class Meta:
+        model=User
+        fields='__all__'
+        widgets= {'password':forms.PasswordInput(attrs={'class':'col-10 offset-1'}),'username':forms.TextInput(attrs={'class':'col-10 offset-1'})}
