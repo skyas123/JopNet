@@ -125,13 +125,16 @@ def friends(request):
       friendId=request.POST['Add']
       friendsAdd=Friends.objects.filter(pair=user.pk).filter(pair=friendId)
       if friendsAdd.count()==1:
-       friendsAdd.Status=2
-       friendsAdd.first().save()
+       friendsAddObj=friendsAdd.first()
+       friendsAddObj.Status=2
+       friendsAddObj.save()
 
   if 'Skip' in request.POST:
       friendId=request.POST['Skip']
-      friendsSkip=Friends.objects.get(Q(pair=user.pk) and Q(pair=friendId))
-      friendsSkip.delete()
+      friendsSkip=Friends.objects.filter(pair=user.pk).filter(pair=friendId)
+      if friendsSkip.count()==1:
+       friendsSkipObj=friendsSkip.first()
+       friendsSkipObj.delete()
       
       
 
