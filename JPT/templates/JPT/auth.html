@@ -37,10 +37,12 @@
                     <form method="post">
                       {% csrf_token %}
                        <div class="col-12">
+                        <p class="offset-1">Username:</p>
                           {{ form.username }}
                         </div>
 
                        <div class="col-12 my-3">
+                         <p class="offset-1">Password:</p>
                           {{ form.password }}
                        </div>
 
