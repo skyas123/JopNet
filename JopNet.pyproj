@@ -86,6 +86,7 @@
     <Content Include="JPT\templates\JPT\news.html" />
     <Content Include="JPT\templates\JPT\friends.html" />
     <Content Include="JPT\templates\JPT\refreshdlg.html" />
+    <Content Include="JPT\templates\JPT\registration.html" />
     <Content Include="JPT\templates\JPT\resultSearch.html" />
     <Content Include="requirements.txt" />
     <Content Include="db.sqlite3" />

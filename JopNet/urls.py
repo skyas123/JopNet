@@ -21,8 +21,8 @@ urlpatterns = [
     url(r'^dialogs$',JPT.views.dialogs, name='dialogs'),
     url(r'^dialogs/(\d+)$',JPT.views.dialog, name='dialog'),
     url(r'auth',JPT.views.auth, name='auth'),
-   url(r'^guest/(\d+)/(\d+)$',JPT.views.guest, name='guest'),
-   # url(r'registration',JPT.views.registration, name='registration'),
+    url(r'^guest/(\d+)/(\d+)$',JPT.views.guest, name='guest'),
+    url(r'registration',JPT.views.registration, name='registration'),
    # url(r'perInfo',JPT.views.perInfo, name='perInfo'),
     
 

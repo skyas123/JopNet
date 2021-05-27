@@ -228,3 +228,20 @@ def auth(request):
 
 
  return render(request, 'JPT/auth.html',{'form':form})
+
+def registration(request):
+
+ prsnFrm=PersonsForms
+ userform=User
+
+ if 'submit' in request.POST:
+     prsnFrm=Persons(request.POST)
+     userform=User(request.POST)
+
+     if userform.is_valid():
+         user=userform.save()
+         if prsnFrm.is_valid():
+             per=prsnFrm.save()
+             user.persons_set.add(per)
+ 
+ return render(request,'JPT/registration.html',{"PersonsForms":prsnFrm,"userform":userform})

@@ -38,17 +38,15 @@
                       {% csrf_token %}
                        <div class="col-12">
                         <p class="offset-1">Username:</p>
-                          {{ form.username }}
+                          {{ userform }}
                         </div>
 
                        <div class="col-12 my-3">
                          <p class="offset-1">Password:</p>
-                          {{ form.password }}
+                          {{ userform}}
                        </div>
 
-  <button class="btn btn-primary m-2" type="submit">Log In</button>
-
-    <a href="/registration" type="button" class="btn btn-link">Sign up</a>
+  <button class="btn btn-primary m-2" type="submit" name="submit">Log In</button>
  
 </form>
 
