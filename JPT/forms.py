@@ -16,6 +16,7 @@ class PersonsForms (forms.ModelForm):
     class Meta:
         model=Persons
         fields='__all__'
+        widgets= {'size':forms.NumberInput(attrs={'class':'col-10 offset-1'})}
 
 class PostsForm(forms.ModelForm):
     class Meta:
@@ -59,4 +60,8 @@ class UserForms (forms.ModelForm):
     class Meta:
         model=User
         fields='__all__'
-        widgets= {'password':forms.PasswordInput(attrs={'class':'col-10 offset-1'}),'username':forms.TextInput(attrs={'class':'col-10 offset-1'})}
+        widgets= {'password':forms.PasswordInput(attrs={'class':'col-10 offset-1'}),
+                  'username':forms.TextInput(attrs={'class':'col-10 offset-1'}),
+                  'email':forms.TextInput(attrs={'class':'col-10 offset-1'}),
+                  'first_name':forms.TextInput(attrs={'class':'col-10 offset-1'}),
+                  'last_name':forms.TextInput(attrs={'class':'col-10 offset-1'})}

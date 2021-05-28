@@ -232,16 +232,18 @@ def auth(request):
 def registration(request):
 
  prsnFrm=PersonsForms
- userform=User
+ userform=UserForms
 
  if 'submit' in request.POST:
      prsnFrm=Persons(request.POST)
-     userform=User(request.POST)
+     userform=UserForms(request.POST)
 
      if userform.is_valid():
-         user=userform.save()
+         userform=userform.save()
          if prsnFrm.is_valid():
              per=prsnFrm.save()
              user.persons_set.add(per)
+
+
  
  return render(request,'JPT/registration.html',{"PersonsForms":prsnFrm,"userform":userform})

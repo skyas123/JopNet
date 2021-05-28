@@ -31,22 +31,44 @@
     <main>
             <div class="min-vh-100" style="background-color:aliceblue">
 
-                <div class="col-4  container-fliud position-absolute top-50 start-50 translate-middle shadow-sm rounded-3" style="background-color:white">
+                <div class="col-lg-8 offset-lg-2" style="background-color:white">
                     <div class="row">
-                    <h3 class="offset-4">Sign In</h3>
+                    <h3 class="offset-5">Personal Data</h3>
                     <form method="post">
                       {% csrf_token %}
                        <div class="col-12">
                         <p class="offset-1">Username:</p>
-                          {{ userform }}
+                          {{ userform.username}}
                         </div>
 
                        <div class="col-12 my-3">
                          <p class="offset-1">Password:</p>
-                          {{ userform}}
+                          {{ userform.password}}
                        </div>
 
-  <button class="btn btn-primary m-2" type="submit" name="submit">Log In</button>
+                       <div class="col-12 my-3">
+                          <p class="offset-1">Email:</p>
+                           {{userform.email}}
+                       </div>
+
+                       <div class="col-12 my-3">
+                          <p class="offset-1">First name:</p>
+                           {{userform.first_name}}
+                       </div>
+
+                         <div class="col-12 my-3">
+                          <p class="offset-1">Last name:</p>
+                           {{userform.last_name}}
+                       </div>
+
+                        
+                         <div class="col-12 my-3">
+                          <p class="offset-1">Size:</p>
+                           {{PersonsForms.size}}
+                       </div>
+
+
+  <button class="btn btn-primary m-2" type="submit" name="submit">Submit</button>
  
 </form>
 
