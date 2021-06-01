@@ -16,9 +16,11 @@ from .forms import PostsForm
 from .forms import ava
 from .forms import photo
 from .forms import UserForms
+from .forms import SignUpForm
 from django.db.models import Q
 from django.http import JsonResponse
 from django.core import serializers
+
 
 
 # Create your views here.
@@ -105,8 +107,8 @@ def friends(request):
 
        if not len(req) or len(req)==0:
         Status=2
-        friendsList=User.objects.filter(persons__friends__pair=user.pk,persons__friends__Status=2)
-        potentialFriendList=User.objects.filter(persons__friends__pair=user.pk,persons__friends__Status=1).exclude(persons__friends__author=user.pk)
+        friendsList=User.objects.filter(persons__friends__pair=user.persons,persons__friends__Status=2)
+        potentialFriendList=User.objects.filter(persons__friends__pair=user.persons,persons__friends__Status=1).exclude(persons__friends__author=user)
         response=render(request, 'JPT/resultSearch.html',{"friendsList":friendsList,"user":user,"potentialFriendList":potentialFriendList,"Status":Status})
         return HttpResponse(response,content_type="html")
 
@@ -118,20 +120,23 @@ def friends(request):
 
   else:
        Status=2
-       friendsList=User.objects.filter(persons__friends__pair=user.pk,persons__friends__Status=2)
-       potentialFriendList=User.objects.filter(persons__friends__pair=user.pk,persons__friends__Status=1).exclude(persons__friends__author=user.pk)
+       friendsList=User.objects.filter(persons__friends__pair=user.persons,persons__friends__Status=2)
+       potentialFriendList=User.objects.filter(persons__friends__pair=user.persons,persons__friends__Status=1).exclude(persons__friends__author=user)
+       print(user.pk)
 
   if 'Add' in request.POST:
-      friendId=request.POST['Add']
-      friendsAdd=Friends.objects.filter(pair=user.pk).filter(pair=friendId)
+      friendId=int(request.POST['Add'])
+      friend=User.objects.get(pk=friendId)
+      friendsAdd=Friends.objects.filter(pair=user.persons).filter(pair=friend.persons)
       if friendsAdd.count()==1:
        friendsAddObj=friendsAdd.first()
        friendsAddObj.Status=2
        friendsAddObj.save()
 
   if 'Skip' in request.POST:
-      friendId=request.POST['Skip']
-      friendsSkip=Friends.objects.filter(pair=user.pk).filter(pair=friendId)
+      friendId=int(request.POST['Skip'])
+      friend=User.objects.get(pk=friendId)
+      friendsSkip=Friends.objects.filter(pair=user.persons).filter(pair=friend.persons)
       if friendsSkip.count()==1:
        friendsSkipObj=friendsSkip.first()
        friendsSkipObj.delete()
@@ -142,15 +147,15 @@ def friends(request):
 
 def dialogs(request):
     user=request.user
-    dialogsList=Dialogs.objects.filter(listOfMembers=user.pk)
+    dialogsList=Dialogs.objects.filter(listOfMembers=user.persons)
     return render(request,'JPT/dialogs.html',{"dialogsList":dialogsList,"persons":user})
 
 def dialog(request, *args):
-  dlgpk=args[0]
+  dlgpk=int(args[0])
   user=request.user
   Dialogs.objects.get(pk=dlgpk)
 
-  if  Dialogs.objects.get(pk=dlgpk,listOfMembers=user.pk): 
+  if  Dialogs.objects.get(pk=dlgpk,listOfMembers=user.persons): 
      messageList=Message.objects.filter(atachment=dlgpk)
 
   if "text" in request.POST:
@@ -162,7 +167,7 @@ def dialog(request, *args):
       if message.is_valid():
            msg=message.save(commit=False)
            msg.atachment=Dialogs.objects.get(pk=dlgpk)
-           msg.author=Persons.objects.get(pk=user.id)
+           msg.author=Persons.objects.get(pk=user.persons.pk)
            msg.save()
 
       if formpicture.is_valid():
@@ -186,9 +191,10 @@ def guest(request, *args):
     news=Posts.objects.filter(author=guestPK)
 
     if 'writeAmessage' in request.POST:
-     
         dialogset=Dialogs.objects.filter(listOfMembers=guestInfo.persons.pk).filter(listOfMembers=user.persons.pk)
         if dialogset.count()==1:
+            print('here')
+            print(dialogset.count())
             for dlg in dialogset:
                 Dialog=dlg
                 return redirect('dialog', Dialog.pk)
@@ -212,7 +218,6 @@ def guest(request, *args):
 
     return render(request, 'JPT/guest.html',{"news":news,"guest":guestInfo,"Status":Status})
 
-
 def auth(request):
 
  form=UserForms
@@ -231,19 +236,19 @@ def auth(request):
 
 def registration(request):
 
- prsnFrm=PersonsForms
- userform=UserForms
-
- if 'submit' in request.POST:
-     prsnFrm=Persons(request.POST)
-     userform=UserForms(request.POST)
-
-     if userform.is_valid():
-         userform=userform.save()
-         if prsnFrm.is_valid():
-             per=prsnFrm.save()
-             user.persons_set.add(per)
+ if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            user=form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
+            login(request, user)
+            return redirect('/')
+ else:
+        form = SignUpForm()
+   
 
 
  
- return render(request,'JPT/registration.html',{"PersonsForms":prsnFrm,"userform":userform})
+ return render(request,'JPT/registration.html',{"userform":form})

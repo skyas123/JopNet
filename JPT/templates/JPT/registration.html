@@ -43,8 +43,15 @@
 
                        <div class="col-12 my-3">
                          <p class="offset-1">Password:</p>
-                          {{ userform.password}}
+                          {{ userform.password1}}
                        </div>
+
+
+                         <div class="col-12 my-3">
+                         <p class="offset-1">Repeat the password:</p>
+                          {{ userform.password2}}
+                       </div>
+
 
                        <div class="col-12 my-3">
                           <p class="offset-1">Email:</p>
@@ -61,11 +68,7 @@
                            {{userform.last_name}}
                        </div>
 
-                        
-                         <div class="col-12 my-3">
-                          <p class="offset-1">Size:</p>
-                           {{PersonsForms.size}}
-                       </div>
+                      
 
 
   <button class="btn btn-primary m-2" type="submit" name="submit">Submit</button>
