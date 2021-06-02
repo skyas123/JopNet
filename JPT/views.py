@@ -26,7 +26,7 @@ from django.core import serializers
 # Create your views here.
 def index(request):
   user=request.user
-  news=Posts.objects.filter(author=user.pk)
+  news=Posts.objects.filter(author=user.persons)
 
   if 'st' in request.POST:
       formava=ava(request.POST,request.FILES)
