@@ -14,7 +14,7 @@
 
                 <div class="row">
                     {%if dlg.listOfMembers.count == 2%}
-                    {%if dlg.listOfMembers.first.pk == persons.pk %}
+                    {%if dlg.listOfMembers.first == persons.persons %}
                     <div class="col-1 my-auto">
                         <img src={{MEDIA_URL}}{{dlg.listOfMembers.last.user.persons.ava.photo}} class="rounded-circle my-auto" style="width: 40px; height: 40px;" alt="">
                     </div>
@@ -29,7 +29,7 @@
                     </div>
 
                      <div class="col-3">
-                     {{dlg.listOfMembers.first.user.first_name}} {{dlg.listOfMembers.user.first.last_name}}
+                     {{dlg.listOfMembers.first.user.first_name}} {{dlg.listOfMembers.first.user.last_name}}
                       </div>
                      {%endif%}
                     {%else%}

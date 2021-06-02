@@ -122,7 +122,7 @@ def friends(request):
        Status=2
        friendsList=User.objects.filter(persons__friends__pair=user.persons,persons__friends__Status=2)
        potentialFriendList=User.objects.filter(persons__friends__pair=user.persons,persons__friends__Status=1).exclude(persons__friends__author=user)
-       print(user.pk)
+  
 
   if 'Add' in request.POST:
       friendId=int(request.POST['Add'])
@@ -184,11 +184,11 @@ def dialog(request, *args):
 
 def guest(request, *args):
     user=request.user
-    guestPK=args[0]
+    guestPK=int(args[0])
     Status=args[1]
     Status=int(Status)
     guestInfo=User.objects.get(pk=guestPK)
-    news=Posts.objects.filter(author=guestPK)
+    news=Posts.objects.filter(author=guestInfo.persons)
 
     if 'writeAmessage' in request.POST:
         dialogset=Dialogs.objects.filter(listOfMembers=guestInfo.persons.pk).filter(listOfMembers=user.persons.pk)
