@@ -252,3 +252,14 @@ def registration(request):
 
  
  return render(request,'JPT/registration.html',{"userform":form})
+
+def perInfo(request):
+ user=request.user
+ if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+           print(fo)
+ else:
+             form = SignUpForm()
+
+ return render(request,'JPT/perInfo.html',{"userform":form})

@@ -85,6 +85,7 @@
     <Content Include="JPT\templates\JPT\layout.html" />
     <Content Include="JPT\templates\JPT\news.html" />
     <Content Include="JPT\templates\JPT\friends.html" />
+    <Content Include="JPT\templates\JPT\perInfo.html" />
     <Content Include="JPT\templates\JPT\refreshdlg.html" />
     <Content Include="JPT\templates\JPT\registration.html" />
     <Content Include="JPT\templates\JPT\resultSearch.html" />

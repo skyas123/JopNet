@@ -4,9 +4,14 @@
 {% block content %}
 
 <div class="row shadow-sm rounded-3" style="background-color:white">
-<h1>{{user.first_name}} {{user.last_name}}</h1>
+<div class="container-fluid">
+<div class="row">
+<h1>{{user.first_name}} {{user.last_name}} </h1>
+ <a href="/perInfo" type="button" class="btn-default col-3 offset-10"><i class="bi bi-gear-fill mh-100"></i></a>
 </div>
- 
+</div>
+ </div>
+
 <div class="row m-2" style="height:20rem">
 
 
