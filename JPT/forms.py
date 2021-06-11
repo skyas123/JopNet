@@ -18,8 +18,8 @@ class ava (forms.ModelForm):
 class PersonsForms (forms.ModelForm):
     class Meta:
         model=Persons
-        fields='__all__'
-        widgets= {'size':forms.NumberInput(attrs={'class':'col-10 offset-1'})}
+        fields=['size']
+        widgets= {'size':forms.NumberInput(attrs={'class': 'form-control'})}
 
 class PostsForm(forms.ModelForm):
     class Meta:

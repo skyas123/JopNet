@@ -256,10 +256,20 @@ def registration(request):
 def perInfo(request):
  user=request.user
  if request.method == 'POST':
-        form = SignUpForm(request.POST)
+        person=Persons.objects.get(user=user)
+        form = SignUpForm(request.POST,instance=user)
+        formP=PersonsForms(request.POST,instance=person)
         if form.is_valid():
-           print(fo)
+           form.save()
+           formP.save()
+           username = form.cleaned_data.get('username')
+           raw_password = form.cleaned_data.get('password1')
+           user = authenticate(username=username, password=raw_password)
+           login(request, user)
+           return redirect('/')
+           
  else:
              form = SignUpForm()
+             formP=PersonsForms()
 
- return render(request,'JPT/perInfo.html',{"userform":form})
+ return render(request,'JPT/perInfo.html',{"userform":form,"form":formP})
