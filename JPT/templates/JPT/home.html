@@ -5,9 +5,22 @@
 
 <div class="row shadow-sm rounded-3" style="background-color:white">
 <div class="container-fluid">
-<div class="row">
+<div class="row">  
+ <div class="col-10">
 <h1>{{user.first_name}} {{user.last_name}} </h1>
- <a href="/perInfo" type="button" class="btn-default col-3 offset-10"><i class="bi bi-gear-fill mh-100"></i></a>
+ </div>
+<div class="col-1 position-relative">
+ <h3><a href="/perInfo" type="button" class="btn-default position-absolute top-50 start-50 translate-middle"><i class="bi bi-gear-fill mh-100"></i></a></h3>
+    </div>
+
+ <form action="" method="POST" enctype="multipart/form-data">
+        
+       {% csrf_token %}
+<div class="col-1 position-relative">
+ <h3><i class="bi bi-door-open mh-100 btn-default position-absolute top-50 start-50 translate-middle"></i></h3>
+    </div>
+
+    </form>
 </div>
 </div>
  </div>
