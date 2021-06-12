@@ -24,6 +24,7 @@ urlpatterns = [
     url(r'^guest/(\d+)/(\d+)$',JPT.views.guest, name='guest'),
     url(r'registration',JPT.views.registration, name='registration'),
     url(r'perInfo',JPT.views.perInfo, name='perInfo'),
+    url(r'logout',JPT.views.logout_view, name='logout_view'),
     
 
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)  #<- only for developing(probably)
