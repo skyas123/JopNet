@@ -236,7 +236,7 @@ def auth(request):
  return render(request, 'JPT/auth.html',{'form':form})
 
 def registration(request):
-
+ form = SignUpForm()
  if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
@@ -246,8 +246,7 @@ def registration(request):
             user = authenticate(username=username, password=raw_password)
             login(request, user)
             return redirect('/')
- else:
-        form = SignUpForm()
+
    
 
 
@@ -256,8 +255,12 @@ def registration(request):
 
 def perInfo(request):
  user=request.user
+ person=Persons.objects.get(user=user)
+
+ form = SignUpForm(initial={"username":user.username,"email":user.email,"first_name":user.first_name,"last_name":user.last_name,"password1":user.password})
+ formP=PersonsForms(initial={"size":person.size})
+
  if request.method == 'POST':
-        person=Persons.objects.get(user=user)
         form = SignUpForm(request.POST,instance=user)
         formP=PersonsForms(request.POST,instance=person)
         if form.is_valid():
@@ -268,10 +271,9 @@ def perInfo(request):
            user = authenticate(username=username, password=raw_password)
            login(request, user)
            return redirect('/')
-           
- else:
-             form = SignUpForm()
-             formP=PersonsForms()
+     
+    
+ 
 
  return render(request,'JPT/perInfo.html',{"userform":form,"form":formP})
 

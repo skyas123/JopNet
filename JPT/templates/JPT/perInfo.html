@@ -29,6 +29,21 @@
 
     <!--основной блок-->
     <main>
+        
+       {% if userform.errors %}
+    {% for field in userform %}
+        {% for error in field.errors %}
+            <div class="alert alert-danger">
+                <strong>{{ error|escape }}</strong>
+            </div>
+        {% endfor %}
+    {% endfor %}
+    {% for error in userform.non_field_errors %}
+        <div class="alert alert-danger">
+            <strong>{{ error|escape }}</strong>
+        </div>
+    {% endfor %}
+{% endif %}
             <div class="min-vh-100" style="background-color:aliceblue">
 
                 <div class="col-lg-8 offset-lg-2" style="background-color:white">
@@ -42,7 +57,7 @@
                         </div>
 
                        <div class="col-12 my-3">
-                         <p class="offset-1">Password:</p>
+                         <p class="offset-1">Password(put a new one or repeat the old):</p>
                           {{ userform.password1}}
                        </div>
 
@@ -88,6 +103,8 @@
 
             </div>
         </div>
+
+
         </main>
     
    
