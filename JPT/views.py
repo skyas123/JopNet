@@ -21,7 +21,7 @@ from .forms import SignUpForm
 from django.db.models import Q
 from django.http import JsonResponse
 from django.core import serializers
-
+from django.utils import timezone
 
 
 # Create your views here.
@@ -240,7 +240,7 @@ def registration(request):
  if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
-            user=form.save()
+            user=form.save(last_login=timezone.now())
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
