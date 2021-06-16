@@ -9,7 +9,7 @@ class Persons(models.Model):
      user=models.OneToOneField(User, on_delete=models.CASCADE)
      date_of_appearence=models.DateField(auto_now=False, auto_now_add=False,null=True)
      size=models.IntegerField(null=True,blank=True,default=0)
-     ava=models.ForeignKey("Media",on_delete=models.CASCADE,blank=True,null=True,default=1)
+     ava=models.ForeignKey("Media",on_delete=models.CASCADE,blank=True,null=True)
      
 
      @receiver(post_save, sender=User)
