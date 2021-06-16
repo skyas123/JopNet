@@ -240,6 +240,7 @@ def registration(request):
  if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
+            form.last_login=timezone.now()
             user=form.save()
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
