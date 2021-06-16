@@ -149,7 +149,7 @@ def friends(request):
 def dialogs(request):
     user=request.user
     dialogsList=Dialogs.objects.filter(listOfMembers=user.persons)
-    return render(request,'JPT/dialogs.html',{"dialogsList":dialogsList,"persons":user})
+    return render(request,'JPT/Dialogs.html',{"dialogsList":dialogsList,"persons":user})
 
 def dialog(request, *args):
   dlgpk=int(args[0])
