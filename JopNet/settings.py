@@ -119,7 +119,7 @@ STATIC_URL = '/static/'
 STATIC_ROOT = posixpath.join(*(BASE_DIR.split(os.path.sep) + ['static']))
 
 MEDIA_URL='/media/'
-MEDIA_ROOT='D:/socialAssNetwork/JopNet/JPT/media'
+MEDIA_ROOT=posixpath.join(*(BASE_DIR.split(os.path.sep) + ['media']))
 
 # Heroku: Update database configuration from $DATABASE_URL.
 import dj_database_url
