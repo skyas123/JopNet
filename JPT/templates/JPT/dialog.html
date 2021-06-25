@@ -150,7 +150,59 @@
      objDiv.scrollTop = objDiv.scrollHeight;
 }
 
-$("[name=myModal]").prependTo("body");
+    $("[name=myModal]").prependTo("body");
+
+    var csrftoken = $("[name=csrfmiddlewaretoken]").val();
+
+
+    var Url = window.location.url;
+    window.setInterval(function () {
+
+         $.ajax({
+
+                headers:{
+                 "X-CSRFToken": csrftoken
+                },
+
+	            url: Url,
+	            method: 'post',
+	            dataType: 'html',
+	            data: {ask:"ask"},
+             success: function (data) {
+
+                 var answr = parseInt(data);
+                 if (answr == 1) {
+
+                       $.ajax({
+
+                headers:{
+                 "X-CSRFToken": csrftoken
+                },
+
+	            url: Url,
+	            method: 'post',
+	            dataType: 'html',
+	            data: {find: 'find'},
+                success: function (data) {
+                  $("#chatlog").html(data)
+                   
+                }
+        
+          });
+
+
+
+
+
+                 }
+             
+                   
+                }
+        
+          });
+
+
+}, 3000); 
 </script>
 
    

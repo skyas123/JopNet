@@ -48,6 +48,7 @@ class Posts(models.Model):
 
 
 class Dialogs(models.Model):
+ UnWrtittenFlag=models.IntegerField(null=True,blank=True,default=0)
  listOfMembers=models.ManyToManyField("Persons")
  dialogPfoto=models.ForeignKey(Media,on_delete=models.CASCADE,null=True)
  date_of_appearence=models.DateTimeField(auto_now_add=True)

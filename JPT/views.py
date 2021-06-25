@@ -154,13 +154,16 @@ def dialogs(request):
 def dialog(request, *args):
   dlgpk=int(args[0])
   user=request.user
-  Dialogs.objects.get(pk=dlgpk)
+  dlg=Dialogs.objects.get(pk=dlgpk)
+
+
 
   if  Dialogs.objects.get(pk=dlgpk,listOfMembers=user.persons): 
      messageList=Message.objects.filter(atachment=dlgpk)
 
   if "text" in request.POST:
-      print(request.user)
+      dlg.UnWrtittenFlag=1
+      dlg.save()
       message=messageForm(request.POST)
       formpicture=photo(request.POST,request.FILES)
       images=request.FILES.getlist('photo')
@@ -180,6 +183,17 @@ def dialog(request, *args):
   else:
       message=messageForm
       formpicture=photo
+ 
+  if "find" in request.POST:
+       dlg.UnWrtittenFlag=0
+       dlg.save()
+       response=render(request,'JPT/refreshdlg.html',{"messageList": messageList,"user":user,"message":messageForm,"formpicture":formpicture})
+       return HttpResponse(response,content_type="html")
+
+  if "ask" in request.POST:
+      return HttpResponse(dlg.UnWrtittenFlag,content_type="str")
+ 
+
 
   return render(request,'JPT/dialog.html',{"messageList": messageList,"user":user,"message":messageForm,"formpicture":formpicture})
 
